@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" dir="ltr">
+<link href="../static/css/Layout.css" th:href="@{/css/b1.css}" rel="stylesheet" />
+<head>
+
+    <title> Central Bank of Syria  </title>
+    <style th:inline="text">
+    body{
+        background: url{[[@{/img/Background.jpg}]]}
+                    no-repeat center center fixed;
+    }
+     </style>
+
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<ul>
+    <li><a class="active" href="#home">Home</a></li>
+    <li><a href="#news">News</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#about">About</a></li>
+</ul>
+
+<h3>Real Estate Groos System</h3>
+
+<form class="form" action="#" th:action="@{/add}" th:object="${check}" method="post">
+    <label for="FTeam">First Team</label><br>
+    <input type="text"  name="FirstBank"  placeholder="Enter The Bank Name" th:field="*{FirstBank}" ><br><br>
+    <label for="Branch">Branch</label><br>
+    <input type="text" id="Branch" name="Branch" placeholder="Enter Your Bank Swift Code" th:field="*{FirstBankSW}" ><br><br>
+    <label for="chnum">Cheque Number  </label><br>
+    <input type="text" id="chnum" name="chnum"  placeholder="Enter The Check Nuumber" th:field="*{CheckId}"  ><br><br>
+    <label for="Second Team">Second Team</label><br>
+    <input type="text" id="Second Team" name="Second Team" placeholder="Enter The Second Bank" th:field="*{SecondBank}" ><br><br>
+    <label for="Branch">Branch</label><br>
+    <input type="text" id="FTeam" name="FTeam"  placeholder="Enter the Second Bank Swift Code" th:field="*{SecondBankSW}" ><br><br>
+    <label for="ChMount">Cheque Mount </label><br>
+    <input type="text" id="ChMount" name="ChMount" placeholder="Enter The Amount" th:field="*{Amount}"><br><br>
+    <input class="a" type="submit" value="Submit">
+</form>
+</div>
+</body>
+</html>
