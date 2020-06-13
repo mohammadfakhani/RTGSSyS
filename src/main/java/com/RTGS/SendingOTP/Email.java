@@ -8,7 +8,7 @@ public class Email extends Message{
 
     public Email(String receiver) {
         setMessageSender("fakomohamad2021@gmail.com");
-        setSenderPassword("Asdfg12f");
+        setSenderPassword("imad@1234");
         setTheSubject("رمز التحقق من مصرف سورية المركزي");
         setOTP(otpMethods.Code());
         setMessageReceiver(receiver);

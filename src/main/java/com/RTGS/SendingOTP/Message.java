@@ -69,7 +69,7 @@ public abstract class Message {
         msg.setFrom(new InternetAddress(messageSender, false));
         msg.setRecipients(javax.mail.Message.RecipientType.TO, InternetAddress.parse(messageReceiver));
         msg.setSubject(theSubject);
-        msg.setContent("OTP EMAIL", "text/html");
+        msg.setContent(OTP, "text/html");
         msg.setSentDate(new Date());
         MimeBodyPart messageBodyPart = new MimeBodyPart();
         messageBodyPart.setContent(OTP, "text/html");
