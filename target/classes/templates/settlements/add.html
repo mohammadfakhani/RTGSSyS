@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html  lang="ar" dir="rtl"
+ xmlns:th="http://www.thymeleaf.org">
+<head>
+ <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Central Bank of syria</title>
+  <!-- base:css -->
+  <link rel="stylesheet" href="/../../new/vendors/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="/../../new/vendors/base/vendor.bundle.base.css">
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="/../../new/css/style.css">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="/../../new/images/photo5810167110637302253.jpg" />
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-12">
+            <!-- jquery validation -->
+            <div class="card card-primary">
+              <div class="card-header">
+              <h4>معلومات الشيك</h4>
+              </div>
+              <hr>
+                <form  action="#" th:action="@{/settlements/checks/add}" th:object="${check}" method="post">
+                <div class="card-body">
+                  <div class="form-group">
+                   <label for="exampleInputPassword1">رقم الشيك التسلسلي</label>
+                   <input type="text" name="checkId" class="form-control" placeholder="Enter User Name" th:field="*{checkId}">
+                  </div>
+                  <hr>
+					<div class="form-group">
+                   <label for="exampleInputPassword1">اسم المصرف الأول</label>
+                   <input type="text" name="firstBankName" class="form-control" placeholder="Enter User Email" th:field="*{firstBankName}">
+                  </div>
+                  <div class="form-group">
+                   <label for="exampleInputPassword1">اسم االفرع الأول</label>
+                   <input type="text" name="FirstBranchName" class="form-control" placeholder="Enter User Email" th:field="*{FirstBranchName}">
+                  </div>
+					<hr>
+				 	<div class="form-group">
+                   <label for="exampleInputPassword1">رمز الفرع الأول</label>
+                   <input type="text" name="FirstBranchCode" class="form-control" placeholder="Enter User Email" th:field="*{FirstBranchCode}">
+                  </div>
+                  <hr>
+                  <div class="form-group">
+                   <label for="exampleInputPassword1">اسم المصرف الثاني</label>
+                   <input type="text" name="secondBankName" class="form-control" placeholder="Enter User Email" th:field="*{secondBankName}">
+                  </div>
+                  <div class="form-group">
+                   <label for="exampleInputPassword1">اسم الفرع الثاني</label>
+                   <input type="text" name="SecondBranchName" class="form-control" placeholder="Enter User Email" th:field="*{SecondBranchName}">
+                  </div>
+                  <hr>
+                  <div class="form-group">
+                   <label for="exampleInputPassword1">رمز الفرع الثاني</label>
+                   <input type="text" name="SecondBranchCode" class="form-control" placeholder="Enter User Email" th:field="*{SecondBranchCode}">
+                  </div>
+                  <hr>
+                  <div class="form-group">
+                   <label for="exampleInputPassword1">القيمة</labela>
+                   <input type="text" name="Amount" class="form-control" placeholder="Enter User Email" th:field="*{Amount}">
+                  </div>
+                         
+                </div>
+                <hr>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary">تأكيد</button>
+                </div>
+              </form>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+            </div>
+            <!-- /.card -->
+            </div>
+          <!--/.col (left) -->
+          <!-- right column -->
+          <div class="col-md-6">
+
+          </div>
+          <!--/.col (right) -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+</body>
+</html>

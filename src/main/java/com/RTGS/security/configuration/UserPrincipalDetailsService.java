@@ -25,7 +25,9 @@ public class UserPrincipalDetailsService extends MasterService implements UserDe
 		if(user == null ) {
 			user = new User();
 		}else {
-			//super.activityService.addActivityLog(user.getId(),user.getUsername() , "Login");
+			System.out.println("login success proceeding to TSO");
+			//generate - save - send OTP to Email // set user access state to Hold 
+			// the aspect should always check for the user access state 
 		}
 		UserPrincipal userPrincipal = new UserPrincipal(user) ;  
 		

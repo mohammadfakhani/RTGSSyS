@@ -29,6 +29,10 @@ public class User implements java.io.Serializable {
 	@Convert(converter = StringEncryptDecryptConverter.class)
 	private String username ;
 	@Convert(converter = StringEncryptDecryptConverter.class)
+	private String branchName = " " ;
+	@Convert(converter = StringEncryptDecryptConverter.class)
+	private String bankName = " " ;
+	@Convert(converter = StringEncryptDecryptConverter.class)
 	private String Gender="" ;
 	@Convert(converter = StringEncryptDecryptConverter.class)
 	private String UserPermissions = "none" ;
@@ -66,6 +70,21 @@ public class User implements java.io.Serializable {
 	}
 	
 	
+	public User(String email, String password, String username, String branchName, String bankName, String gender,
+			String userPermissions, String userRoles, LocalDateTime createdAt, boolean active) {
+		super();
+		this.email = email;
+		this.password = password;
+		this.username = username;
+		this.branchName = branchName;
+		this.bankName = bankName;
+		Gender = gender;
+		UserPermissions = userPermissions;
+		UserRoles = userRoles;
+		this.createdAt = createdAt;
+		Active = active;
+	}
+
 	public void flatUserDetailes() {
 		System.out.println("user ID : "+this.id+" username :"+this.username+" user email : "+this.email+" gender : "
 	+this.Gender+" role "+this.UserRoles +" permissions : "+this.UserPermissions);
@@ -231,6 +250,22 @@ public class User implements java.io.Serializable {
 				}
 			}
 		}
+	}
+
+	public String getBranchName() {
+		return branchName;
+	}
+
+	public void setBranchName(String branchName) {
+		this.branchName = branchName;
+	}
+
+	public String getBankName() {
+		return bankName;
+	}
+
+	public void setBankName(String bankName) {
+		this.bankName = bankName;
 	}
 
 	

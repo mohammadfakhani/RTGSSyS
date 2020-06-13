@@ -19,6 +19,5 @@ public class OrderMessageSender {
 
     public void sendOrder(Chaque check) {
         this.rabbitTemplate.convertAndSend(RabbitConfig.QUEUE_ORDERS, check);
-
     }
 }

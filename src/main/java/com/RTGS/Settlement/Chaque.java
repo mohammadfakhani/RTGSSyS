@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,6 +14,8 @@ import com.RTGS.MasterService;
 import com.RTGS.Aspect.enc.IntEncryptDecryptConverter;
 import com.RTGS.Aspect.enc.StringEncryptDecryptConverter;
 
+
+@Entity
 public class Chaque implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -143,7 +146,13 @@ public class Chaque implements Serializable {
 		return UserID;
 	}
 
-	
+	@Override 
+	public String toString() {
+		return "check id : "+this.checkId + "first bank name  : "+this.firstBankName+
+				"first branch name : "+this.FirstBranchName +"fist branch code : "+this.FirstBranchCode
+				+" second bank name : "+this.secondBankName+" second branch name : "+this.SecondBranchName 
+				+" second branch code : "+this.SecondBranchCode+" check ammount : "+this.Amount ; 
+	}
 
 
 }
