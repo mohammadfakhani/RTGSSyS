@@ -1,5 +1,6 @@
 package com.RTGS;
 
+import com.RTGS.Settlement.Chaque;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
