@@ -3,89 +3,146 @@ package com.RTGS;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import com.RTGS.Aspect.enc.IntEncryptDecryptConverter;
+import com.RTGS.Aspect.enc.StringEncryptDecryptConverter;
+
 public class Chaque implements Serializable {
-    public int id;
-    public int CheckId;
-    public String FirstBank;
-    public int FirstBankSW;
-    public String SecondBank;
-    public int SecondBankSW;
-    public double Amount;
 
-    public Chaque() {
+	private static final long serialVersionUID = 1L;
 
-    }
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    @Convert(converter = IntEncryptDecryptConverter.class)
+    private int id;
+    
+    @Column(nullable = false )
+    @Convert(converter = IntEncryptDecryptConverter.class)
+    private  int checkId;
+    
+    @Column(nullable = false )
+    @Convert(converter = StringEncryptDecryptConverter.class)
+    private  String firstBankName;
+    
+    @Column(nullable = false )
+    @Convert(converter = StringEncryptDecryptConverter.class)
+    private  String secondBankName;
+    
+    @Column(nullable = false )
+    @Convert(converter = StringEncryptDecryptConverter.class)
+    private  String FirstBranchName;
+    
+    @Column(nullable = false )
+    @Convert(converter = StringEncryptDecryptConverter.class)
+    private  String FirstBranchCode;
+    
+    @Column(nullable = false )
+    @Convert(converter = StringEncryptDecryptConverter.class)
+    private  String SecondBranchName;
+    
+    @Column(nullable = false )
+    @Convert(converter = StringEncryptDecryptConverter.class)
+    private  String SecondBranchCode;
+    
+    @Column(nullable = false )
+    //@Convert(converter = DoubleEncryptDecryptConverter.class)
+    private  long Amount;
+	
+    @Column(nullable = false )
+    private  LocalDateTime localDateTime = MasterService.getCurrDateTime() ;
+    
+    @Column(nullable = false )
+    @Convert(converter = StringEncryptDecryptConverter.class)
+    private  String UserName ; 
+    
+    @Column(nullable = false )
+    @Convert(converter = IntEncryptDecryptConverter.class)
+    private  int UserID ; 
+    
+	private boolean active = false ;
+	
 
-    private LocalDateTime localDateTime ;
-    private boolean active = false ;
+	public Chaque() {}
+	
+	public Chaque(int checkId, String firstBankName, String secondBankName, String firstBranchName,
+			String firstBranchCode, String secondBranchName, String secondBranchCode, long amount, String userName,
+			int userID, boolean active) {
+		super();
+		this.checkId = checkId;
+		this.firstBankName = firstBankName;
+		this.secondBankName = secondBankName;
+		FirstBranchName = firstBranchName;
+		FirstBranchCode = firstBranchCode;
+		SecondBranchName = secondBranchName;
+		SecondBranchCode = secondBranchCode;
+		Amount = amount;
+		UserName = userName;
+		UserID = userID;
+		this.active = active;
+	}
 
+	public boolean isActive() {
+		return active;
+	}
 
-    public Chaque(int checkId, String firstBank, int firstBankSW, String secondBank, int secondBankSW, double amount) {
-        CheckId = checkId;
-        FirstBank = firstBank;
-        FirstBankSW = firstBankSW;
-        SecondBank = secondBank;
-        SecondBankSW = secondBankSW;
-        Amount = amount;
-    }
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 
-    public int getCheckId() {
-        return CheckId;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public void setCheckId(int checkId) {
-        CheckId = checkId;
-    }
+	public int getCheckId() {
+		return checkId;
+	}
 
-    public String getFirstBank() {
-        return FirstBank;
-    }
+	public String getFirstBankName() {
+		return firstBankName;
+	}
 
-    public void setFirstBank(String firstBank) {
-        FirstBank = firstBank;
-    }
+	public String getSecondBankName() {
+		return secondBankName;
+	}
 
-    public int getFirstBankSW() {
-        return FirstBankSW;
-    }
+	public String getFirstBranchName() {
+		return FirstBranchName;
+	}
 
-    public void setFirstBankSW(int firstBankSW) {
-        FirstBankSW = firstBankSW;
-    }
+	public String getFirstBranchCode() {
+		return FirstBranchCode;
+	}
 
-    public String getSecondBank() {
-        return SecondBank;
-    }
+	public String getSecondBranchName() {
+		return SecondBranchName;
+	}
 
-    public void setSecondBank(String secondBank) {
-        SecondBank = secondBank;
-    }
+	public String getSecondBranchCode() {
+		return SecondBranchCode;
+	}
 
-    public int getSecondBankSW() {
-        return SecondBankSW;
-    }
+	public long getAmount() {
+		return Amount;
+	}
 
-    public void setSecondBankSW(int secondBankSW) {
-        SecondBankSW = secondBankSW;
-    }
+	public LocalDateTime getLocalDateTime() {
+		return localDateTime;
+	}
 
-    public double getAmount() {
-        return Amount;
-    }
+	public String getUserName() {
+		return UserName;
+	}
 
-    public void setAmount(double amount) {
-        Amount = amount;
-    }
+	public int getUserID() {
+		return UserID;
+	}
 
-
-//    @Override
-//    public String toString() {
-//        return "Order{" +
-//                "orderNumber='" + orderNumber + '\'' +
-//                ", productId='" + productId + '\'' +
-//                ", amount=" + amount +
-//                '}';
-//    }
+	
 
 
 }
