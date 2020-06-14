@@ -6,6 +6,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.RTGS.MasterService;
+import com.RTGS.SendingOTP.Message;
+import com.RTGS.SendingOTP.MessageFactory;
 import com.RTGS.security.users.User;
 import com.RTGS.security.users.UserRepository;
 
@@ -25,12 +27,21 @@ public class UserPrincipalDetailsService extends MasterService implements UserDe
 		if(user == null ) {
 			user = new User();
 		}else {
-			System.out.println("login success proceeding to TSO");
-			//generate - save - send OTP to Email // set user access state to Hold 
-			// the aspect should always check for the user access state 
+			System.out.println("login success proceeding to two step Auth");
+			try {
+				 MessageFactory messageFactory = new MessageFactory();
+			        Message message =null;
+			        message =messageFactory.makeMessage("email",user.getEmail());
+			        System.out.println("msg sent to "+message.getMessageReceiver()+" from : "+message.getMessageSender()+" with OTP : "+message.getOTP()+"\n");
+			        //message.sendMessage();
+			        user.setLastCode(message.getOTP());
+			        user.setTokenEntered(false);
+			        this.userRepo.save(user);
+			}catch(Exception e ) {
+				System.out.println("OPT attemp faild ");
+			}
 		}
 		UserPrincipal userPrincipal = new UserPrincipal(user) ;  
-		
 		return userPrincipal;
 	}
 

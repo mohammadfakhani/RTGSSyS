@@ -17,7 +17,7 @@ import com.RTGS.MasterService;
 
 
 @RestController
-public class UserController {
+public class UserController extends MasterService {
 
 	@Autowired
 	UserService userService ; 
@@ -115,5 +115,17 @@ public class UserController {
 	public void injectUser() {
 		this.userService.injectUsers();
 	}
+	
+	@RequestMapping(method = RequestMethod.GET , value = "/test")
+	public void test() {
+		if(super.get_current_User() == null ) {
+			System.out.println("null user ");
+		}
+		else 
+			System.out.println("user detected with :"+super.get_current_User().getUsername());
+	}
+	
+	
+
 	
 }

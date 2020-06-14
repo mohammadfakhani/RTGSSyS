@@ -39,7 +39,11 @@ public class User implements java.io.Serializable {
 	@Convert(converter = StringEncryptDecryptConverter.class)
 	private String UserRoles ="none";
 
-
+	@Convert(converter = StringEncryptDecryptConverter.class)
+	private String lastCode = "" ; 
+	
+	private boolean tokenEntered = false ; 
+	
 	private LocalDateTime createdAt ; 
 	private boolean Active = false ; 
 
@@ -49,26 +53,6 @@ public class User implements java.io.Serializable {
 		this.UserRoles = "none"; 
 		this.UserPermissions = "none";
 	}
-	
-	public User(String email, String password, String username, String gender, String userPermissions,
-			String userRoles, boolean isActive) {
-		super();
-		this.email = email;
-		this.password = password;
-		this.username = username;
-		Gender = gender;
-		if(userPermissions.equalsIgnoreCase("") || userPermissions.equalsIgnoreCase(" "))
-			this.UserPermissions = "none";
-		else 
-			this.UserPermissions = userPermissions ; 
-		if(userRoles.equalsIgnoreCase("") || userRoles.equalsIgnoreCase(" "))
-			this.UserRoles = "none";
-		else 
-			this.UserRoles = userRoles; 
-		this.Active = isActive;
-		this.createdAt = MasterService.getCurrDateTime() ; 
-	}
-	
 	
 	public User(String email, String password, String username, String branchName, String bankName, String gender,
 			String userPermissions, String userRoles, LocalDateTime createdAt, boolean active) {
@@ -268,5 +252,26 @@ public class User implements java.io.Serializable {
 		this.bankName = bankName;
 	}
 
+	public String getLastCode() {
+		return lastCode;
+	}
+
+	public void setLastCode(String lastCode) {
+		this.lastCode = lastCode;
+	}
+
+	public boolean isTokenEntered() {
+		return tokenEntered;
+	}
+
+	public void setTokenEntered(boolean tokenEntered) {
+		this.tokenEntered = tokenEntered;
+	}
+
+	public boolean validateToken(String token ) {
+		return token.equalsIgnoreCase(this.lastCode) ; 
+	}
 	
 }
+
+

@@ -24,15 +24,31 @@ public class ChaqueController {
 	
 	@RequestMapping(method = RequestMethod.POST , value = "/settlements/checks/add")
 	public ModelAndView addNewCheckResponse(@ModelAttribute Chaque chaque) {
-		//this.chaqueService.addCheck(chaque);
-		System.out.println(chaque.getFirstBankName());
-		System.out.println(chaque);
-		return this.success("check added successfully");
+		String result = this.chaqueService.addCheck(chaque);
+		if(!result.equalsIgnoreCase("ok")) {
+			return failView(result); 
+		}else {
+			//send to msgQ 
+		return this.success("تمت إضافة الشيك بنجاح");
+		}
 	}
+	
+	
+	@RequestMapping(method = RequestMethod.GET , value = "/settlements/test")
+	public void aspectTest() {
+		System.out.println("done");
+	}
+	
 	
 	private ModelAndView success(String msg ) {
 		ModelAndView mav = new ModelAndView("settlements/success");
 		mav.addObject("msg",msg);
+		return mav ; 
+	}
+	
+	private ModelAndView failView(String result) {
+		ModelAndView  mav = new ModelAndView("settlements/fail");
+		mav.addObject("msg", result);
 		return mav ; 
 	}
 	
