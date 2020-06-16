@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import com.RTGS.Aspect.Model.exceptions.UnAuthenticatedException;
-import com.RTGS.security.users.User;
+import com.RTGS.security.users.RTGSUser;
 import com.RTGS.security.users.UserRepository;
 
 @Aspect
@@ -29,7 +29,7 @@ public class AspectModel {
 	public void secureUserService(JoinPoint  proceedingJoinPoint)  {
 			System.out.println("intercepting user Controller methods ");
 			printFunctionCallInfo(proceedingJoinPoint);
-			User user = get_current_User();   
+			RTGSUser user = get_current_User();   
 			if(!checkUserTokenState(user)) {
 				throw new UnAuthenticatedException();
 			}
@@ -37,13 +37,13 @@ public class AspectModel {
 	
 	
 	
-	private User get_current_User() {
+	private RTGSUser get_current_User() {
 		String username ; 
     	 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	        Object principal =  auth.getPrincipal();
 	        if(principal instanceof UserDetails) {
 	        	 username = ((UserDetails) principal).getUsername() ; 
-		         for(User user : this.userRepo.findAll()) {
+		         for(RTGSUser user : this.userRepo.findAll()) {
 		 			if(user.getUsername().equalsIgnoreCase(username)) {
 		 				return user ; 
 		 			}
@@ -57,7 +57,7 @@ public class AspectModel {
 	         return null  ; 
     }
 	
-	private boolean checkUserTokenState(User user ) {
+	private boolean checkUserTokenState(RTGSUser user ) {
 		if(user.isTokenEntered()) {
 			return true ;
 		}

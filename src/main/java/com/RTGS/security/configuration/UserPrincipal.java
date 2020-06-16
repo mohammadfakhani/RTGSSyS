@@ -8,17 +8,17 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.RTGS.security.users.User;
+import com.RTGS.security.users.RTGSUser;
 
 
 public class UserPrincipal implements UserDetails  {
 
 	private static final long serialVersionUID = 1L;
-	private User user  ; 
+	private RTGSUser user  ; 
 
 	
 	
-	public UserPrincipal(User user ) { 
+	public UserPrincipal(RTGSUser user ) { 
 		this.user = user ; 
 	}
 	

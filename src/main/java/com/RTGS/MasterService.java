@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.RTGS.security.users.User;
+import com.RTGS.security.users.RTGSUser;
 import com.RTGS.security.users.UserRepository;
 
 
@@ -25,13 +25,13 @@ public class MasterService {
 	 
 	}
 	
-	protected User get_current_User() {
+	protected RTGSUser get_current_User() {
 		String username ; 
     	 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	        Object principal =  auth.getPrincipal();
 	        if(principal instanceof UserDetails) {
 	        	 username = ((UserDetails) principal).getUsername() ; 
-		         for(User user : this.userRepo.findAll()) {
+		         for(RTGSUser user : this.userRepo.findAll()) {
 		 			if(user.getUsername().equalsIgnoreCase(username)) {
 		 				return user ; 
 		 			}
@@ -54,6 +54,10 @@ public class MasterService {
 		   return now ; 
 	}
 	
+	public static String getDateAsString() {
+		LocalDate now = LocalDate.now();  
+		return now.toString();
+	}
 	
 	public static String getYearFromStringDate(String date) {
 		LocalDate desiredDate = LocalDate.parse(date);

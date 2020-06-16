@@ -1,17 +1,15 @@
 package com.RTGS.security.users;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
 
-import com.RTGS.MasterService;
 import com.RTGS.Aspect.enc.IntEncryptDecryptConverter;
 import com.RTGS.Aspect.enc.StringEncryptDecryptConverter;
 
 @Entity
-public class User implements java.io.Serializable {
+public class RTGSUser implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -46,18 +44,17 @@ public class User implements java.io.Serializable {
 	
 	private boolean tokenEntered = false ; 
 	
-	private LocalDateTime createdAt ; 
+	private String createdAt ; 
 	private boolean Active = false ; 
 
 
-	public User() {
-		this.createdAt = MasterService.getCurrDateTime() ;
+	public RTGSUser() {
 		this.UserRoles = "none"; 
 		this.UserPermissions = "none";
 	}
 	
-	public User(String email, String password, String username, String branchName, String bankName,String branchCode, String gender,
-			String userPermissions, String userRoles, LocalDateTime createdAt, boolean active) {
+	public RTGSUser(String email, String password, String username, String branchName, String bankName,String branchCode, String gender,
+			String userPermissions, String userRoles, String createdAt, boolean active) {
 		super();
 		this.email = email;
 		this.password = password;
@@ -142,11 +139,11 @@ public class User implements java.io.Serializable {
 	}
 	
 
-	public LocalDateTime getCreatedAt() {
+	public String getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(LocalDateTime createdAt) {
+	public void setCreatedAt(String createdAt) {
 		this.createdAt = createdAt;
 	}
 

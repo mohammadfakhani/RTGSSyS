@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.RTGS.MasterService;
 import com.RTGS.SendingOTP.Message;
 import com.RTGS.SendingOTP.MessageFactory;
-import com.RTGS.security.users.User;
+import com.RTGS.security.users.RTGSUser;
 import com.RTGS.security.users.UserRepository;
 
 
@@ -23,9 +23,9 @@ public class UserPrincipalDetailsService extends MasterService implements UserDe
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = this.userRepository.findByUsername(username) ;
+		RTGSUser user = this.userRepository.findByUsername(username) ;
 		if(user == null ) {
-			user = new User();
+			user = new RTGSUser();
 		}else {
 			System.out.println("login success proceeding to two step Auth");
 			try {

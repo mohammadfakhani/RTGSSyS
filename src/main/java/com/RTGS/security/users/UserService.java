@@ -26,19 +26,19 @@ public class UserService extends MasterService {
 	//
 	
 	//all Users// 
-	public List<User> getAllUsers() {
+	public List<RTGSUser> getAllUsers() {
 		return this.userRepository.findAll();
 	}
 	
 	//find user by id // 
 	@Transactional
-	public User getUserByID(int id ) {
-		List<User> allUsers = this.userRepository.findAll() ; 
+	public RTGSUser getUserByID(int id ) {
+		List<RTGSUser> allUsers = this.userRepository.findAll() ; 
 		if(allUsers.isEmpty()) {
 			System.out.println("empty UsersList ");
 			return null ;  
 		}
-		for(User user : allUsers) {
+		for(RTGSUser user : allUsers) {
 			if(user.getId() == id ){
 				return user  ; 
 			}
@@ -48,8 +48,8 @@ public class UserService extends MasterService {
 	}
 	
 	//find User by userName 
-	public User getUserByUserName(String userName) {
-		for(User user : this.userRepository.findAll()) {
+	public RTGSUser getUserByUserName(String userName) {
+		for(RTGSUser user : this.userRepository.findAll()) {
 			if(user.getUsername().equalsIgnoreCase(userName)) {
 				return user ; 
 			}
@@ -59,7 +59,7 @@ public class UserService extends MasterService {
 	
 	//add new user // 
 	@Transactional
-	public String addUser(User user ) {
+	public String addUser(RTGSUser user ) {
 		user.flatUserDetailes();
 		if(checkUserinforDuplication(user)) {
 			return "User already exist in the system";
@@ -76,7 +76,7 @@ public class UserService extends MasterService {
 		
 	}
 	
-	private String validateUserInfo(User user) {
+	private String validateUserInfo(RTGSUser user) {
 		if(user.getUsername().length() < 6 || user.getUsername().length() > 20) {
 			return "اسم المستخد يجب ان يكون بين 7  و 20 محرف " ; 
 		}
@@ -99,8 +99,8 @@ public class UserService extends MasterService {
 		return "ok";
 	}
 	
-	private User getUserBYId(int id ) {
-		for(User user : this.userRepo.findAll()) {
+	private RTGSUser getUserBYId(int id ) {
+		for(RTGSUser user : this.userRepo.findAll()) {
 			if(user.getId() == id ) {
 				return user ; 
 			}
@@ -110,11 +110,11 @@ public class UserService extends MasterService {
 	
 	//update current user // 
 	@Transactional
-	public String updateUser(User user) {
+	public String updateUser(RTGSUser user) {
 		String result = "";
 		try {
 			if(this.userRepository.findById(user.getId()) != null) {
-				User dataUser = getUserBYId(user.getId()); 
+				RTGSUser dataUser = getUserBYId(user.getId()); 
 				result = validateUserInfo(user); 
 				if(result.equalsIgnoreCase("ok")){
 					user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -132,17 +132,17 @@ public class UserService extends MasterService {
 	}
 	
 	//delete user//
-	public void deleteUser(User user ) {
+	public void deleteUser(RTGSUser user ) {
 		this.userRepository.deleteById(user.getId());
 	}
 	
 	
 	//User Info Check 
 	//check if the user is currently in the system // 
-	public boolean checkUserinforDuplication(User user ) {
-		List<User> usersList = this.userRepository.findAll() ; 
+	public boolean checkUserinforDuplication(RTGSUser user ) {
+		List<RTGSUser> usersList = this.userRepository.findAll() ; 
 		for(int i = 0 ; i < usersList.size() ; i++ ) {
-			User tempUser = usersList.get(i) ;
+			RTGSUser tempUser = usersList.get(i) ;
 			if(tempUser.getUsername().equalsIgnoreCase(user.getUsername())) {
 				return true ; 
 			}
@@ -176,10 +176,10 @@ public class UserService extends MasterService {
 	}	
 	
 	
-	public List<User> getNonActiveUsers() {
-		List<User> allUsers = this.userRepository.findAll() ; 
-		List<User> nonActiveUsers = new ArrayList<User>(); 
-		for(User user : allUsers) {
+	public List<RTGSUser> getNonActiveUsers() {
+		List<RTGSUser> allUsers = this.userRepository.findAll() ; 
+		List<RTGSUser> nonActiveUsers = new ArrayList<RTGSUser>(); 
+		for(RTGSUser user : allUsers) {
 			if(!user.isActive()) {
 				nonActiveUsers.add(user);
 			}
@@ -187,10 +187,10 @@ public class UserService extends MasterService {
 		return nonActiveUsers; 
 	}
 	
-	public List<User> getActiveUsers(){
-		List<User> allUsers = this.userRepository.findAll() ; 
-		List<User> ActiveUsers = new ArrayList<User>(); 
-		for(User user : allUsers) {
+	public List<RTGSUser> getActiveUsers(){
+		List<RTGSUser> allUsers = this.userRepository.findAll() ; 
+		List<RTGSUser> ActiveUsers = new ArrayList<RTGSUser>(); 
+		for(RTGSUser user : allUsers) {
 			if(user.isActive()) {
 				ActiveUsers.add(user);
 			}
@@ -199,13 +199,13 @@ public class UserService extends MasterService {
 	}
 	
 	public void activateUser(int userid) {
-		User user = this.getUserByID(userid);
+		RTGSUser user = this.getUserByID(userid);
 		user.setActive(true);
 		this.userRepository.save(user);
 	}
 	
 	public void deActivateUser(int userid) {
-		User user = this.getUserByID(userid);
+		RTGSUser user = this.getUserByID(userid);
 		user.setActive(false);
 		this.userRepository.save(user);		
 	}
@@ -215,20 +215,20 @@ public class UserService extends MasterService {
 	}
 	
 	public void injectUsers() { 
-		User admin = new User("mohammed_.1996@live.com",passwordEncoder.encode("admin123"),"admin","دمشق", 
-				"المركزي","#cbr1","male","ACCESS_TEST1,ACCESS_TEST2","ADMIN",MasterService.getCurrDateTime(),true);
+		RTGSUser admin = new RTGSUser("mohammed_.1996@live.com",passwordEncoder.encode("admin123"),"admin","دمشق", 
+				"المركزي","#cbr1","male","ACCESS_TEST1,ACCESS_TEST2","ADMIN",MasterService.getDateAsString(),true);
 		this.userRepository.save(admin);
-		User b1 = new User("tadeMail@gmail.com",passwordEncoder.encode("admin123"),"user1","الزراعة", 
-				"التجاري","#combr1","male","EMPLOYEE","USER",MasterService.getCurrDateTime(),true);
+		RTGSUser b1 = new RTGSUser("tadeMail@gmail.com",passwordEncoder.encode("admin123"),"user1","الزراعة", 
+				"التجاري","#combr1","male","EMPLOYEE","USER",MasterService.getDateAsString(),true);
 		this.userRepository.save(b1);
-		User b2 = new User("build@gmail.com",passwordEncoder.encode("admin123"),"user2","المزة", 
-				"العقاري","#abr1","male","EMPLOYEE","USER",MasterService.getCurrDateTime(),true);
+		RTGSUser b2 = new RTGSUser("build@gmail.com",passwordEncoder.encode("admin123"),"user2","المزة", 
+				"العقاري","#abr1","male","EMPLOYEE","USER",MasterService.getDateAsString(),true);
 		this.userRepository.save(b2);
 	}
 	
 	public List<String> getSettlementBanks(){
 		List<String> allBanks = new ArrayList<String>() ; 
-		for(User user : this.userRepo.findAll()) {
+		for(RTGSUser user : this.userRepo.findAll()) {
 			if(!allBanks.contains(user.getBankName())) {
 				allBanks.add(user.getBankName());
 			}
@@ -238,7 +238,7 @@ public class UserService extends MasterService {
 	
 	public List<String> getSettlementBranches(){
 		List<String> allBranches = new ArrayList<String>() ; 
-		for(User user : this.userRepo.findAll()) {
+		for(RTGSUser user : this.userRepo.findAll()) {
 			if(!allBranches.contains(user.getBranchName())) {
 				allBranches.add(user.getBranchName());
 			}
@@ -247,7 +247,7 @@ public class UserService extends MasterService {
 	}
 	
 	public boolean validateUserToken(String token) {
-		User currUser = super.get_current_User() ; 
+		RTGSUser currUser = super.get_current_User() ; 
 		if(currUser.validateToken(token)) {
 			currUser.setTokenEntered(true);
 			this.userRepo.save(currUser);

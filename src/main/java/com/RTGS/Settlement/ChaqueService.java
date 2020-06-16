@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.RTGS.MasterService;
 import com.RTGS.OrderMessageSender;
-import com.RTGS.security.users.User;
+import com.RTGS.security.users.RTGSUser;
 import com.RTGS.security.users.UserService;
 
 @Service
@@ -42,7 +42,7 @@ public class ChaqueService extends MasterService{
 	}
 	
 	public String addCheck(Chaque chaque) {
-		User user =  super.get_current_User() ; 
+		RTGSUser user =  super.get_current_User() ; 
 		chaque.setSecondBankName(user.getBankName());
 		chaque.setSecondBranchName(user.getBranchName());
 		chaque.setSecondBranchCode(user.getBranchCode());
@@ -106,7 +106,7 @@ public class ChaqueService extends MasterService{
 	
 	// banks Branches Pair array to resolve cross branch name conflict 
 	private void initBanks_BranchesArray(){
-		List<User> usersList = this.userSerivce.getAllUsers() ; 
+		List<RTGSUser> usersList = this.userSerivce.getAllUsers() ; 
 		this.allBanksArray = new String[usersList.size()][3] ; 
 		this.BanksArraySize  = usersList.size() ; 
 		for(int i = 0 ; i < this.BanksArraySize ; i ++ ) {
