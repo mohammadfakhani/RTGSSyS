@@ -81,4 +81,14 @@ public class MasterService {
 		return mav ; 
 	}
 
+	public static void addSequesnceVaraibles(ModelAndView mav,int index) {
+		index++ ;
+    	mav.addObject("nxt",index);
+    	int prev = index - 2 ;
+    	if(prev < 0 ) {
+    		prev = 0 ; 
+    	}
+    	mav.addObject("prev",prev);
+	}
+	
 }

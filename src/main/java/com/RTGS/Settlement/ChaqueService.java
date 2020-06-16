@@ -1,5 +1,6 @@
 package com.RTGS.Settlement;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,13 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.RTGS.MasterService;
+import com.RTGS.security.users.User;
 import com.RTGS.security.users.UserService;
 
 @Service
-public class ChaqueService {
+public class ChaqueService extends MasterService{
 
 	@Autowired 
 	private ChaqueRepository chaqueRepo ; 
@@ -21,14 +25,18 @@ public class ChaqueService {
 	@Autowired
 	private UserService userSerivce; 
 	
+	private String[][] allBanksArray ;
+	
+	private int BanksArraySize = 0 ; 
+	
 	public List<Chaque> getAllChecks(int PageNumber){
 		Pageable paging = PageRequest.of(PageNumber, 20, Sort.by("id"));
-		Page<Chaque> pagedResult = this.chaqueRepo.findAll(paging);
+		Slice<Chaque> pagedResult = this.chaqueRepo.findBysecondBranchCode(super.get_current_User().getBranchCode(), paging);
 		if (pagedResult.hasContent()) {
 			return pagedResult.getContent();
 		} else {
 			return new ArrayList<Chaque>();
-		}
+		}	
 	}
 	
 	public String addCheck(Chaque chaque) {
@@ -36,12 +44,16 @@ public class ChaqueService {
 		if(!result.equalsIgnoreCase("ok")) {
 			return result ; 
 		}else {
+			chaque.setUserID(super.get_current_User().getId());
+			chaque.setUserName(super.get_current_User().getUsername());
+			chaque.setLocalDateTime(MasterService.getCurrDateTime());
 		this.chaqueRepo.save(chaque);
 		return "ok";
 		}
 	}
 	
 	private String validateChaqueData(Chaque check) {
+		
 		List<Chaque> allChecks = this.chaqueRepo.findAll() ; 
 		if(check.getAmount() <= 0 ) {
 			return "قيمة الشيك يجب أن تكون موجبة" ;
@@ -55,31 +67,16 @@ public class ChaqueService {
 			return "الفرع الأول هو نفسه الفرع الثاني" ; 
 		}
 		
-		
-		List<String> allBanks = this.userSerivce.getSettlementBanks() ; 
-		List<String> allBranches = this.userSerivce.getSettlementBranches() ; 
+		initBanks_BranchesArray() ; 
 
-		//check the first bank data 
-		if(!allBanks.contains(check.getFirstBankName())){
-			return "البنك الأول غير مسجل على النظام"; 
-		}
-		//check branch 
-		if(!allBranches.contains(check.getFirstBranchName())) {
-			return "الفرع الأول غير موجود";
+		if(!checkBankBranchCodeMatch(check.getFirstBankName() ,check.getFirstBranchName(),check.getFirstBranchCode())) {
+			return "خطأ في معلومات البنك الأول"; 
 		}
 		
-		
-		//check the second bank data 
-		 
-		if(!allBanks.contains(check.getSecondBankName()) ) {
-			return "البنك الثاني غير موجود" ; 
+		if(!checkBankBranchCodeMatch(check.getSecondBankName() ,check.getSecondBranchName(),check.getSecondBranchCode())) {
+			return "خطأ في معلومات البنك الثاني"; 
 		}
-		
-		//check branch
-		if(!allBranches.contains(check.getSecondBranchName())) {
-			return "الفرع الثاني غير موجود" ;
-		}
-		
+
 		for(Chaque tempCheck : allChecks ) {
 			if(check.getCheckId() == tempCheck.getCheckId() ) {
 				return "الرقم التسلسلي للشيك مدخل مسبقا";  
@@ -87,5 +84,46 @@ public class ChaqueService {
 		}	
 		return "ok" ; 
 	}
+	
+	private boolean checkBankBranchCodeMatch(String bankName , String branchName , String branchCode) {
+		for(int i = 0 ; i < this.BanksArraySize ; i ++ ) {
+			if(this.allBanksArray[i][0].equalsIgnoreCase(bankName)) {
+				if(this.allBanksArray[i][1].equalsIgnoreCase(branchName)) {
+					if(this.allBanksArray[i][2].equalsIgnoreCase(branchCode)) {
+					return true;
+					} 
+				}
+			}
+		} 
+		return false ; 
+	}
+	
+	// banks Branches Pair array to resolve cross branch name conflict 
+	private void initBanks_BranchesArray(){
+		List<User> usersList = this.userSerivce.getAllUsers() ; 
+		this.allBanksArray = new String[usersList.size()][3] ; 
+		this.BanksArraySize  = usersList.size() ; 
+		for(int i = 0 ; i < this.BanksArraySize ; i ++ ) {
+			this.allBanksArray[i][0] = usersList.get(i).getBankName(); 
+			this.allBanksArray[i][1] = usersList.get(i).getBranchName();
+			this.allBanksArray[i][2] = usersList.get(i).getBranchCode();
+		}
+	}
+
+	public void injectData() {
+		for(int i = 0 ; i < 30 ; i ++) {
+		Chaque check = new  Chaque(i, "التجاري", "المركزي", "الزراعة",
+				"#combr1","دمشق", "#cbr1", 1000+i,
+				MasterService.getCurrDateTime(), "admin",i, false); 
+		this.chaqueRepo.save(check);
+		}
+		for(int i = 0 ; i < 30 ; i ++) {
+			Chaque check = new  Chaque(i,"المركزي" ,"التجاري","دمشق",
+					"#cbr1","الزراعة", "#combr1", 200+i,
+					MasterService.getCurrDateTime(), "test",i, false); 
+			this.chaqueRepo.save(check);
+			}
+	}
+
 	
 }

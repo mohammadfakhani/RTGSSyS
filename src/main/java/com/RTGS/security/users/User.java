@@ -33,6 +33,8 @@ public class User implements java.io.Serializable {
 	@Convert(converter = StringEncryptDecryptConverter.class)
 	private String bankName = " " ;
 	@Convert(converter = StringEncryptDecryptConverter.class)
+	private String branchCode = " ";
+	@Convert(converter = StringEncryptDecryptConverter.class)
 	private String Gender="" ;
 	@Convert(converter = StringEncryptDecryptConverter.class)
 	private String UserPermissions = "none" ;
@@ -54,7 +56,7 @@ public class User implements java.io.Serializable {
 		this.UserPermissions = "none";
 	}
 	
-	public User(String email, String password, String username, String branchName, String bankName, String gender,
+	public User(String email, String password, String username, String branchName, String bankName,String branchCode, String gender,
 			String userPermissions, String userRoles, LocalDateTime createdAt, boolean active) {
 		super();
 		this.email = email;
@@ -67,6 +69,7 @@ public class User implements java.io.Serializable {
 		UserRoles = userRoles;
 		this.createdAt = createdAt;
 		Active = active;
+		this.branchCode = branchCode ; 
 	}
 
 	public void flatUserDetailes() {
@@ -258,6 +261,14 @@ public class User implements java.io.Serializable {
 
 	public void setLastCode(String lastCode) {
 		this.lastCode = lastCode;
+	}
+	
+	public String getBranchCode() {
+		return branchCode;
+	}
+
+	public void setBranchCode(String branchCode) {
+		this.branchCode = branchCode;
 	}
 
 	public boolean isTokenEntered() {

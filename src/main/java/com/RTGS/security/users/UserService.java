@@ -216,13 +216,13 @@ public class UserService extends MasterService {
 	
 	public void injectUsers() { 
 		User admin = new User("mohammed_.1996@live.com",passwordEncoder.encode("admin123"),"admin","دمشق", 
-				"المركزي","male","ACCESS_TEST1,ACCESS_TEST2","ADMIN",MasterService.getCurrDateTime(),true);
+				"المركزي","#cbr1","male","ACCESS_TEST1,ACCESS_TEST2","ADMIN",MasterService.getCurrDateTime(),true);
 		this.userRepository.save(admin);
 		User b1 = new User("tadeMail@gmail.com",passwordEncoder.encode("admin123"),"user1","الزراعة", 
-				"التجاري","male","","",MasterService.getCurrDateTime(),true);
+				"التجاري","#combr1","male","EMPLOYEE","USER",MasterService.getCurrDateTime(),true);
 		this.userRepository.save(b1);
 		User b2 = new User("build@gmail.com",passwordEncoder.encode("admin123"),"user2","المزة", 
-				"العقاري","male","","",MasterService.getCurrDateTime(),true);
+				"العقاري","#abr1","male","EMPLOYEE","USER",MasterService.getCurrDateTime(),true);
 		this.userRepository.save(b2);
 	}
 	

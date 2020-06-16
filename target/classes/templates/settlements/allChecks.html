@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html  lang="ar" dir="rtl"
  xmlns:th="http://www.thymeleaf.org">
-<head th:insert="fragments.html :: headerfiles">
+<head >
  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Central Bank of syria</title>
@@ -17,7 +17,7 @@
   <link rel="shortcut icon" href="/../../new/images/photo5810167110637302253.jpg" />
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
-<header th:insert="fragments.html :: nav"></header>
+
 <div class="wrapper">
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -55,7 +55,7 @@
                         <td colspan="2"> لا يوجد شيكات حاليا</td>
                     </tr>
                     <tr th:each="check : ${checksList}">
-                        <td><span th:text="${check.id}"> id </span></td>
+                        <td><span th:text="${check.checkId}"> checkId </span></td>
                         <td><span th:text="${check.FirstBankName}"> FirstBankName </span></td>
                         <td><span th:text="${check.FirstBranchName}">FirstBranchName</span></td>
                         <td><span th:text="${check.FirstBranchCode}"> FirstBranchCode </span></td>
@@ -70,8 +70,8 @@
                     </tr>
                 </tbody>
             </table>
-            		<a th:href="@{|/settlement/checks/all?index=${nxt}|}" class="btn btn-inverse-primary btn-fw">&laquo; التالي </a>
-					<a th:href="@{|/settlement/checks/all?index=${prev}|}" class="btn btn-inverse-danger btn-fw">السابق&raquo;</a>
+            		<a th:href="@{|/settlements/checks/all?index=${nxt}|}" class="btn btn-inverse-primary btn-fw">&laquo; التالي </a>
+					<a th:href="@{|/settlements/checks/all?index=${prev}|}" class="btn btn-inverse-danger btn-fw">السابق&raquo;</a>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
