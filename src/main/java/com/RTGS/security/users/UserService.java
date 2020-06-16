@@ -215,9 +215,45 @@ public class UserService extends MasterService {
 	}
 	
 	public void injectUsers() { 
-		User admin = new User("admin@email.com",passwordEncoder.encode("admin123"),"admin","male","ACCESS_TEST1,ACCESS_TEST2","ADMIN",true);
+		User admin = new User("mohammed_.1996@live.com",passwordEncoder.encode("admin123"),"admin","دمشق", 
+				"المركزي","#cbr1","male","ACCESS_TEST1,ACCESS_TEST2","ADMIN",MasterService.getCurrDateTime(),true);
 		this.userRepository.save(admin);
-		System.out.println("user injected");
+		User b1 = new User("tadeMail@gmail.com",passwordEncoder.encode("admin123"),"user1","الزراعة", 
+				"التجاري","#combr1","male","EMPLOYEE","USER",MasterService.getCurrDateTime(),true);
+		this.userRepository.save(b1);
+		User b2 = new User("build@gmail.com",passwordEncoder.encode("admin123"),"user2","المزة", 
+				"العقاري","#abr1","male","EMPLOYEE","USER",MasterService.getCurrDateTime(),true);
+		this.userRepository.save(b2);
+	}
+	
+	public List<String> getSettlementBanks(){
+		List<String> allBanks = new ArrayList<String>() ; 
+		for(User user : this.userRepo.findAll()) {
+			if(!allBanks.contains(user.getBankName())) {
+				allBanks.add(user.getBankName());
+			}
+		}
+		return allBanks ; 
+	}
+	
+	public List<String> getSettlementBranches(){
+		List<String> allBranches = new ArrayList<String>() ; 
+		for(User user : this.userRepo.findAll()) {
+			if(!allBranches.contains(user.getBranchName())) {
+				allBranches.add(user.getBranchName());
+			}
+		}
+		return allBranches ; 
+	}
+	
+	public boolean validateUserToken(String token) {
+		User currUser = super.get_current_User() ; 
+		if(currUser.validateToken(token)) {
+			currUser.setTokenEntered(true);
+			this.userRepo.save(currUser);
+			return true ; 
+		}
+		return false  ;
 	}
 	
 }

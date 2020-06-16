@@ -33,10 +33,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		http 
 		.csrf().disable()
 		.authorizeRequests()
-		.antMatchers("/index").authenticated()
+		.antMatchers("/index").authenticated()	
 		.and()
-		.formLogin().defaultSuccessUrl("/index")
-		.loginPage("/login").permitAll()
+		.formLogin()
+		.loginPage("/login").permitAll().defaultSuccessUrl("/tsa")
 		.and()
 		.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login").deleteCookies("JSESSIONID");
 	}

@@ -74,8 +74,8 @@ public class Chaque implements Serializable {
 	public Chaque() {}
 	
 	public Chaque(int checkId, String firstBankName, String secondBankName, String firstBranchName,
-			String firstBranchCode, String secondBranchName, String secondBranchCode, long amount, String userName,
-			int userID, boolean active) {
+			String firstBranchCode, String secondBranchName, String secondBranchCode, long amount,
+			LocalDateTime localDateTime, String userName, int userID, boolean active) {
 		super();
 		this.checkId = checkId;
 		this.firstBankName = firstBankName;
@@ -85,9 +85,99 @@ public class Chaque implements Serializable {
 		SecondBranchName = secondBranchName;
 		SecondBranchCode = secondBranchCode;
 		Amount = amount;
+		this.localDateTime = localDateTime;
 		UserName = userName;
 		UserID = userID;
 		this.active = active;
+	}
+
+
+	public int getCheckId() {
+		return checkId;
+	}
+
+	public void setCheckId(int checkId) {
+		this.checkId = checkId;
+	}
+
+	public String getFirstBankName() {
+		return firstBankName;
+	}
+
+	public void setFirstBankName(String firstBankName) {
+		this.firstBankName = firstBankName;
+	}
+
+	public String getSecondBankName() {
+		return secondBankName;
+	}
+
+	public void setSecondBankName(String secondBankName) {
+		this.secondBankName = secondBankName;
+	}
+
+	public String getFirstBranchName() {
+		return FirstBranchName;
+	}
+
+	public void setFirstBranchName(String firstBranchName) {
+		FirstBranchName = firstBranchName;
+	}
+
+	public String getFirstBranchCode() {
+		return FirstBranchCode;
+	}
+
+	public void setFirstBranchCode(String firstBranchCode) {
+		FirstBranchCode = firstBranchCode;
+	}
+
+	public String getSecondBranchName() {
+		return SecondBranchName;
+	}
+
+	public void setSecondBranchName(String secondBranchName) {
+		SecondBranchName = secondBranchName;
+	}
+
+	public String getSecondBranchCode() {
+		return SecondBranchCode;
+	}
+
+	public void setSecondBranchCode(String secondBranchCode) {
+		SecondBranchCode = secondBranchCode;
+	}
+
+	public long getAmount() {
+		return Amount;
+	}
+
+	public void setAmount(long amount) {
+		Amount = amount;
+	}
+
+	public LocalDateTime getLocalDateTime() {
+		return localDateTime;
+	}
+
+	public void setLocalDateTime(LocalDateTime localDateTime) {
+		this.localDateTime = localDateTime;
+	}
+
+	public String getUserName() {
+		return UserName;
+	}
+
+	public void setUserName(String userName) {
+		UserName = userName;
+	}
+
+	public int getUserID() {
+		return UserID;
+	}
+
+	public void setUserID(int userID) {
+		UserID = userID;
 	}
 
 	public boolean isActive() {
@@ -96,54 +186,6 @@ public class Chaque implements Serializable {
 
 	public void setActive(boolean active) {
 		this.active = active;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public int getCheckId() {
-		return checkId;
-	}
-
-	public String getFirstBankName() {
-		return firstBankName;
-	}
-
-	public String getSecondBankName() {
-		return secondBankName;
-	}
-
-	public String getFirstBranchName() {
-		return FirstBranchName;
-	}
-
-	public String getFirstBranchCode() {
-		return FirstBranchCode;
-	}
-
-	public String getSecondBranchName() {
-		return SecondBranchName;
-	}
-
-	public String getSecondBranchCode() {
-		return SecondBranchCode;
-	}
-
-	public long getAmount() {
-		return Amount;
-	}
-
-	public LocalDateTime getLocalDateTime() {
-		return localDateTime;
-	}
-
-	public String getUserName() {
-		return UserName;
-	}
-
-	public int getUserID() {
-		return UserID;
 	}
 
 	@Override 

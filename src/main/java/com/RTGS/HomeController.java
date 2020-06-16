@@ -13,12 +13,5 @@ public class HomeController {
 	    	ModelAndView mav = new ModelAndView("Login/login");
 	    	return mav; 
 	    }
-	 
-	   @RequestMapping(method = RequestMethod.GET , value = "/index")
-	    public ModelAndView index() {
-	    	ModelAndView mav = new ModelAndView("Login/index");
-	    	return mav; 
-	    }
-	    
-
+   
 }
