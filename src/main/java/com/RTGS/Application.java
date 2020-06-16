@@ -1,13 +1,13 @@
 package com.RTGS;
 
-import com.RTGS.SendingOTP.Message;
-import com.RTGS.SendingOTP.MessageFactory;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
+        import com.RTGS.SendingOTP.Message;
+        import com.RTGS.SendingOTP.MessageFactory;
+        import org.springframework.boot.SpringApplication;
+        import org.springframework.boot.autoconfigure.SpringBootApplication;
+        import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 
-import javax.mail.MessagingException;
-import java.io.IOException;
+        import javax.mail.MessagingException;
+        import java.io.IOException;
 
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class })
 public class Application {
