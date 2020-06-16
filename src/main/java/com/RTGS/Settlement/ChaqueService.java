@@ -1,11 +1,9 @@
 package com.RTGS.Settlement;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
@@ -13,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.RTGS.MasterService;
+import com.RTGS.OrderMessageSender;
 import com.RTGS.security.users.User;
 import com.RTGS.security.users.UserService;
 
@@ -24,6 +23,9 @@ public class ChaqueService extends MasterService{
 
 	@Autowired
 	private UserService userSerivce; 
+	
+	@Autowired 
+	private OrderMessageSender orderMessageSender ; 
 	
 	private String[][] allBanksArray ;
 	
@@ -40,6 +42,10 @@ public class ChaqueService extends MasterService{
 	}
 	
 	public String addCheck(Chaque chaque) {
+		User user =  super.get_current_User() ; 
+		chaque.setSecondBankName(user.getBankName());
+		chaque.setSecondBranchName(user.getBranchName());
+		chaque.setSecondBranchCode(user.getBranchCode());
 		String result = validateChaqueData(chaque) ; 
 		if(!result.equalsIgnoreCase("ok")) {
 			return result ; 
@@ -48,6 +54,7 @@ public class ChaqueService extends MasterService{
 			chaque.setUserName(super.get_current_User().getUsername());
 			chaque.setLocalDateTime(MasterService.getCurrDateTime());
 		this.chaqueRepo.save(chaque);
+		this.orderMessageSender.sendOrder(chaque);
 		return "ok";
 		}
 	}
