@@ -52,7 +52,6 @@ public class ChaqueService extends MasterService{
 		}else {
 			chaque.setUserID(super.get_current_User().getId());
 			chaque.setUserName(super.get_current_User().getUsername());
-			chaque.setLocalDateTime(MasterService.getCurrDateTime());
 		this.chaqueRepo.save(chaque);
 		this.orderMessageSender.sendOrder(chaque);
 		return "ok";
@@ -118,7 +117,7 @@ public class ChaqueService extends MasterService{
 	}
 
 	public void injectData() {
-		for(int i = 0 ; i < 30 ; i ++) {
+		/*for(int i = 0 ; i < 30 ; i ++) {
 		Chaque check = new  Chaque(i, "التجاري", "المركزي", "الزراعة",
 				"#combr1","دمشق", "#cbr1", 1000+i,
 				MasterService.getCurrDateTime(), "admin",i, false); 
@@ -129,7 +128,7 @@ public class ChaqueService extends MasterService{
 					"#cbr1","الزراعة", "#combr1", 200+i,
 					MasterService.getCurrDateTime(), "test",i, false); 
 			this.chaqueRepo.save(check);
-			}
+			}*/
 	}
 
 	
