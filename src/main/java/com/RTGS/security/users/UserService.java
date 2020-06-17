@@ -210,10 +210,6 @@ public class UserService extends MasterService {
 		this.userRepository.save(user);		
 	}
 	
-	public int getUsersCount() {
-		return this.userRepo.getUsersCount() ; 
-	}
-	
 	public void injectUsers() { 
 		RTGSUser admin = new RTGSUser("mohammed_.1996@live.com",passwordEncoder.encode("admin123"),"admin","دمشق", 
 				"المركزي","#cbr1","male","ACCESS_TEST1,ACCESS_TEST2","ADMIN",MasterService.getDateAsString(),true);
