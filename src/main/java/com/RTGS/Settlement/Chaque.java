@@ -7,10 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import com.RTGS.Aspect.enc.IntEncryptDecryptConverter;
 import com.RTGS.Aspect.enc.StringEncryptDecryptConverter;
-
+import com.RTGS.Settlement.settlementReport.SettlementReportModel;
 
 @Entity
 public class Chaque implements Serializable {
@@ -65,10 +66,18 @@ public class Chaque implements Serializable {
     @Column(nullable = false )
     @Convert(converter = IntEncryptDecryptConverter.class)
     private  int UserID ; 
+   
+    
+    private boolean sent = false ; 
     
 	private boolean active = false ;
 	
-
+	private int sequenceNum ; 
+	
+	@ManyToOne
+	private SettlementReportModel settlementReportModel = null ;
+	
+	
 	public Chaque() {}
 	
 	public Chaque(int checkId, String firstBankName, String secondBankName, String firstBranchName,
@@ -184,6 +193,36 @@ public class Chaque implements Serializable {
 
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+
+	public boolean isSent() {
+		return sent;
+	}
+
+	public void setSent(boolean sent) {
+		this.sent = sent;
+	}
+	
+	public int getId() {
+		return id;
+	}
+	
+	public int getSequenceNum() {
+		return sequenceNum;
+	}
+
+	public void setSequenceNum(int sequenceNum) {
+		this.sequenceNum = sequenceNum;
+	}
+
+	
+	public SettlementReportModel getSettlementReportModel() {
+		return settlementReportModel;
+	}
+
+	public void setSettlementReportModel(SettlementReportModel settlementReportModel) {
+		this.settlementReportModel = settlementReportModel;
 	}
 
 	@Override 

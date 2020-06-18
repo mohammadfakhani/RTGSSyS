@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import com.RTGS.MasterService;
 import com.RTGS.OrderMessageSender;
+import com.RTGS.Settlement.sequence.SequenceRepo;
+import com.RTGS.Settlement.sequence.SettlementSequence;
 import com.RTGS.security.users.RTGSUser;
 import com.RTGS.security.users.UserService;
 
@@ -31,6 +33,15 @@ public class ChaqueService extends MasterService{
 	
 	private int BanksArraySize = 0 ; 
 	
+	
+	
+	@Autowired
+	private SequenceRepo sequenceRepo ; 
+	
+	private int sequenceVar = -1 ; 
+	
+	
+	
 	public List<Chaque> getAllChecks(int PageNumber){
 		Pageable paging = PageRequest.of(PageNumber, 20, Sort.by("id"));
 		Slice<Chaque> pagedResult = this.chaqueRepo.findBysecondBranchCode(super.get_current_User().getBranchCode(), paging);
@@ -46,16 +57,39 @@ public class ChaqueService extends MasterService{
 		chaque.setSecondBankName(user.getBankName());
 		chaque.setSecondBranchName(user.getBranchName());
 		chaque.setSecondBranchCode(user.getBranchCode());
+		initSequenceVar() ; 
+		SettlementSequence sq = new SettlementSequence() ; 
+		chaque.setSequenceNum(this.sequenceVar);
+		sq.setSequenceNum(chaque.getSequenceNum());
+		this.sequenceRepo.save(sq);
 		String result = validateChaqueData(chaque) ; 
+		
 		if(!result.equalsIgnoreCase("ok")) {
 			return result ; 
 		}else {
+			//change to one settlement report 
 			chaque.setUserID(super.get_current_User().getId());
 			chaque.setUserName(super.get_current_User().getUsername());
-		this.chaqueRepo.save(chaque);
-		this.orderMessageSender.sendOrder(chaque);
-		return "ok";
+			try {
+				this.orderMessageSender.sendOrder(chaque);
+				chaque.setSent(true);
+			}
+			// if rabbit mq server is down the check will be stored to try sending it later 
+			catch(Exception e ) {   
+				chaque.setSent(false);	
+			}
+			this.chaqueRepo.save(chaque);
+			return "ok";
 		}
+	}
+	
+	private int initSequenceVar() {
+		List<SettlementSequence> sl = this.sequenceRepo.findAll() ; 
+		if(sl.size() == 0 ) 
+			this.sequenceVar = 0 ; 
+		else 
+			this.sequenceVar = sl.get(sl.size()-1).getSequenceNum()+1 ;
+		return this.sequenceVar ; 
 	}
 	
 	private String validateChaqueData(Chaque check) {
