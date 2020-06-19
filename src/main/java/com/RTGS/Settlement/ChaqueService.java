@@ -29,6 +29,9 @@ public class ChaqueService extends MasterService{
 	@Autowired 
 	private OrderMessageSender orderMessageSender ; 
 	
+	//@Autowired 
+	//private SettlementR
+	
 	private String[][] allBanksArray ;
 	
 	private int BanksArraySize = 0 ; 
