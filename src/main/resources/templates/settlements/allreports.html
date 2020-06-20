@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html  lang="ar" dir="rtl"
  xmlns:th="http://www.thymeleaf.org">
-<head >
+<head>
  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Central Bank of syria</title>
@@ -17,7 +17,6 @@
   <link rel="shortcut icon" href="/../../new/images/photo5810167110637302253.jpg" />
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
-
 <div class="wrapper">
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -31,49 +30,40 @@
             <!-- jquery validation -->
             <div class="card card-primary">
               <div class="card-header">
-              <h4>كل الشيكات</h4>
+              <h4>تقارير عمليات التسوية</h4>
               </div>
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
                     <tr>
                     	<th> المعرف </th>
-                        <th> الرقم التسلسلي </th>
-                        <th> المصرف الأول </th>
-                        <th> الفرع الأول </th>
-                        <th> رمز الفرع الأول </th>
-                        <th> المصرف الثاني </th>
-                        <th> الفرع الثاني </th>
-                        <th> رمز الفرع الثاني </th>
-                        <th> القيمة </th>
                         <th> التاريخ </th>
-                        <th> الحالة </th>
-                        <th> اسم المستخدم </th>
-                        <th> معرف المستخدم </th>
                     </tr>
                 </thead>
                 <tbody>
-                <tr th:if="${checksList.empty}">
-                        <td colspan="2"> لا يوجد شيكات حاليا</td>
+                <tr th:if="${reportsList.empty}">
+                        <td colspan="2"> لا يوجد تقارير حاليا</td>
                     </tr>
-                    <tr th:each="check : ${checksList}">
-                    	<td><span th:text="${check.id}"> id </span></td>
-                        <td><span th:text="${check.checkId}"> checkId </span></td>
-                        <td><span th:text="${check.FirstBankName}"> FirstBankName </span></td>
-                        <td><span th:text="${check.FirstBranchName}">FirstBranchName</span></td>
-                        <td><span th:text="${check.FirstBranchCode}"> FirstBranchCode </span></td>
-                        <td><span th:text="${check.SecondBankName}"> SecondBankName </span></td>
-                       	<td><span th:text="${check.SecondBranchName}"> SecondBranchName </span></td>
-                        <td><span th:text="${check.SecondBranchCode}"> SecondBranchCode </span></td>
-                        <td><span th:text="${check.Amount}"> Amount </span></td>
-                        <td><span th:text="${check.localDateTime}"> Date </span></td>
-                        <td><span th:text="${check.active}"> state </span></td>
-                        <td><span th:text="${check.UserName}"> UserName </span></td>
-                        <td><span th:text="${check.UserID}"> UserID </span></td>
+                    <tr th:each="check : ${reportsList}">
+                   		<td><span th:text="${check.id}"> id </span></td>
+                        <td><span th:text="${check.timestamp}"> timestamp </span></td>
+                    	<td>
+                          <form action="#" th:action="@{/settlement/checks/settled/link/}+ ${{check.id}} " method="get">
+                              <button th:id="'table_entry_childs_button_' + ${check.id}" class="btn btn-inverse-primary btn-sm" type="submit">
+                                  <i>الشيكات</i>
+                              </button>
+                          </form>
+                      </td>
+                      <td>
+                          <form action="#" th:action="@{/settlement/operations/reports/link/}+ ${{check.id}}" method="get">
+                              <button th:id="'table_entry_childs_button_' + ${check.id}" class="btn btn-inverse-primary btn-sm" type="submit">
+                                  <i>التقارير</i>
+                              </button>
+                          </form>
+                      </td>
+                    
                     </tr>
                 </tbody>
             </table>
-            		<a th:href="@{|/settlements/checks/all?index=${nxt}|}" class="btn btn-inverse-primary btn-fw">&laquo; التالي </a>
-					<a th:href="@{|/settlements/checks/all?index=${prev}|}" class="btn btn-inverse-danger btn-fw">السابق&raquo;</a>
               </div>
               <!-- /.card-header -->
               <!-- form start -->

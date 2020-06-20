@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -56,6 +57,30 @@ public class ChaqueController {
 		}
 	}
 	
+	
+	@RequestMapping(method = RequestMethod.GET , value = "/settlements/reports")
+	public ModelAndView getSettlementReports() {
+		ModelAndView mav = new ModelAndView("settlements/allreports");
+		
+		return null ; 
+	}
+	
+	@RequestMapping(method = RequestMethod.GET , value = "/settlements/reports/checks/{id}")
+	public ModelAndView getSettlementReportsFromCheck(@PathVariable int id ) {
+		ModelAndView mav = new ModelAndView("settlements/allreports");
+		
+		return null ; 
+	}
+	
+	@RequestMapping(method = RequestMethod.GET , value = "/settlements/reports/settlementReport/{id{")
+	public ModelAndView getSettlementCheck(@PathVariable int id ) {
+		ModelAndView mav = new ModelAndView("settlements/allreports");
+		
+		return null ; 
+	}
+	
+	
+	
 	private ModelAndView success(String msg ) {
 		ModelAndView mav = new ModelAndView("settlements/success");
 		mav.addObject("msg",msg);
@@ -67,5 +92,8 @@ public class ChaqueController {
 		mav.addObject("msg", result);
 		return mav ; 
 	}
+
+	
+	
 	
 }

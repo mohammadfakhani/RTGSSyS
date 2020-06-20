@@ -29,7 +29,7 @@ public class UserController extends MasterService {
 	@RequestMapping(method = RequestMethod.GET , value = "/adminstration/users/all")
 	public ModelAndView getAllUsers() {  
 		ModelAndView mav = new ModelAndView("User/AllUsers");
-		List<User> usersList =  this.userService.getAllUsers() ; 
+		List<RTGSUser> usersList =  this.userService.getAllUsers() ; 
 		mav.addObject("userslist",usersList);
 		return mav ; 
 	}
@@ -38,13 +38,13 @@ public class UserController extends MasterService {
 	@RequestMapping(method = RequestMethod.GET , value="/adminstration/users/adduser")
 	public ModelAndView addUser() {
 		ModelAndView mav = new ModelAndView("User/AddUser");
-		mav.addObject("user",new User());
+		mav.addObject("user",new RTGSUser());
 		return mav; 
 	}
 	
 	//add user .//
 	@RequestMapping(method = RequestMethod.POST , value="/adminstration/users/adduser")
-	public ModelAndView addUser(@ModelAttribute User user)  {
+	public ModelAndView addUser(@ModelAttribute RTGSUser user)  {
 		String response = this.userService.addUser(user); 
 		if(response.equalsIgnoreCase("ok")) {
 			return MasterService.sendSuccessMsg("تمت عملية إضافة مستخدم بنجاح"); 
@@ -58,14 +58,14 @@ public class UserController extends MasterService {
 	@RequestMapping(method = RequestMethod.GET , value="/adminstration/users/update/{id}")
 	public ModelAndView updateUser(@PathVariable int id ) throws IOException {
 		ModelAndView mav = new ModelAndView("User/update");
-		User user = this.userService.getUserByID(id);
+		RTGSUser user = this.userService.getUserByID(id);
 		mav.addObject("user",user);
 		return mav ; 
 	
 	}
 	
 	@RequestMapping(method = RequestMethod.POST , value="/adminstration/users/update")
-	public ModelAndView updateUser(@ModelAttribute User user) {
+	public ModelAndView updateUser(@ModelAttribute RTGSUser user) {
 		String response = this.userService.updateUser(user);
 		if(response.equalsIgnoreCase("ok")) {
 			return MasterService.sendSuccessMsg("تم تعديل المستخدم بنجاح"); 
