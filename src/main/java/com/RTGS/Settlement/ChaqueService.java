@@ -29,7 +29,7 @@ public class ChaqueService extends MasterService{
 	@Autowired 
 	private OrderMessageSender orderMessageSender ; 
 	
-	//@Autowired 
+	// @Autowired 
 	//private SettlementR
 	
 	private String[][] allBanksArray ;

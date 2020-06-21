@@ -55,6 +55,8 @@ public class SettledChaque implements Serializable{
 	 	@Column(nullable = false )
 	 	private String localDateTime ; 
 	 	
+	 	private boolean sent = false ; 
+	 	
 	 	@ManyToOne
 	 	private SettlementReportModel settlementReportModel = null ; 
 	 
@@ -153,6 +155,12 @@ public class SettledChaque implements Serializable{
 			this.localDateTime = localDateTime;
 		}
 
-	   
+		public boolean isSent() {
+			return sent;
+		}
+
+		public void setSent(boolean sent) {
+			this.sent = sent;
+		}
 		
 }
