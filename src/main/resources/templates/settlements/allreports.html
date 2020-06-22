@@ -47,14 +47,14 @@
                    		<td><span th:text="${check.id}"> id </span></td>
                         <td><span th:text="${check.timestamp}"> timestamp </span></td>
                     	<td>
-                          <form action="#" th:action="@{/settlement/checks/settled/link/}+ ${{check.id}} " method="get">
+                          <form action="#" th:action="@{/settlements/reports/settlementReport/}+ ${{check.id}} " method="get">
                               <button th:id="'table_entry_childs_button_' + ${check.id}" class="btn btn-inverse-primary btn-sm" type="submit">
                                   <i>الشيكات</i>
                               </button>
                           </form>
                       </td>
                       <td>
-                          <form action="#" th:action="@{/settlement/operations/reports/link/}+ ${{check.id}}" method="get">
+                          <form action="#" th:action="@{/settlements/reports/checks/}+ ${{check.id}}" method="get">
                               <button th:id="'table_entry_childs_button_' + ${check.id}" class="btn btn-inverse-primary btn-sm" type="submit">
                                   <i>التقارير</i>
                               </button>

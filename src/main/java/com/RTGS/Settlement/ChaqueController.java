@@ -38,6 +38,11 @@ public class ChaqueController {
 		this.chaqueService.injectData() ; 
 		return this.success("test data added ");
 	}
+	@RequestMapping(method = RequestMethod.GET , value = "/settlements/test/sendhold")
+	public ModelAndView sendTestData() {
+		this.chaqueService.sendHoldChecks(); 
+		return this.success("test data sended ");
+	}
 	
 	@RequestMapping(method = RequestMethod.GET , value = "/settlements/checks/add")
 	public ModelAndView addNewCheckRequest() {
@@ -61,22 +66,22 @@ public class ChaqueController {
 	@RequestMapping(method = RequestMethod.GET , value = "/settlements/reports")
 	public ModelAndView getSettlementReports() {
 		ModelAndView mav = new ModelAndView("settlements/allreports");
-		
-		return null ; 
+		mav.addObject("reportsList",this.chaqueService.getAllReports());
+		return mav; 
 	}
 	
 	@RequestMapping(method = RequestMethod.GET , value = "/settlements/reports/checks/{id}")
 	public ModelAndView getSettlementReportsFromCheck(@PathVariable int id ) {
-		ModelAndView mav = new ModelAndView("settlements/allreports");
-		
-		return null ; 
+		ModelAndView mav = new ModelAndView("settlements/SettledReportsList");
+		mav.addObject("reportsList", this.chaqueService.getUserSettledChecks(id));
+		return mav ; 
 	}
 	
-	@RequestMapping(method = RequestMethod.GET , value = "/settlements/reports/settlementReport/{id{")
+	@RequestMapping(method = RequestMethod.GET , value = "/settlements/reports/settlementReport/{id}")
 	public ModelAndView getSettlementCheck(@PathVariable int id ) {
 		ModelAndView mav = new ModelAndView("settlements/allreports");
-		
-		return null ; 
+		mav.addObject("checksList", this.chaqueService.getUserChecks(id));
+		return mav; 
 	}
 	
 	

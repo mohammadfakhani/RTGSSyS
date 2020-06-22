@@ -2,6 +2,7 @@ package com.RTGS;
 
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.annotation.RabbitListenerConfigurer;
+import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.rabbit.listener.RabbitListenerEndpointRegistrar;
@@ -89,4 +90,5 @@ public class RabbitConfig implements RabbitListenerConfigurer {
         return new MappingJackson2MessageConverter();
     }
 
+    
 }

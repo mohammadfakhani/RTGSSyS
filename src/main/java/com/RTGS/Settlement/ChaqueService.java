@@ -2,6 +2,7 @@ package com.RTGS.Settlement;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -14,6 +15,10 @@ import com.RTGS.MasterService;
 import com.RTGS.OrderMessageSender;
 import com.RTGS.Settlement.sequence.SequenceRepo;
 import com.RTGS.Settlement.sequence.SettlementSequence;
+import com.RTGS.Settlement.settledChecks.SettledChaque;
+import com.RTGS.Settlement.settledChecks.SettledChecksRepository;
+import com.RTGS.Settlement.settlementReport.SettlementReportModel;
+import com.RTGS.Settlement.settlementReport.SettlementReportRepository;
 import com.RTGS.security.users.RTGSUser;
 import com.RTGS.security.users.UserService;
 
@@ -28,9 +33,12 @@ public class ChaqueService extends MasterService{
 	
 	@Autowired 
 	private OrderMessageSender orderMessageSender ; 
+
+	@Autowired 
+	private SettlementReportRepository settlementReportRepo ; 
 	
-	// @Autowired 
-	//private SettlementR
+	@Autowired 
+	private SettledChecksRepository settledChecksRepo ; 
 	
 	private String[][] allBanksArray ;
 	
@@ -88,8 +96,8 @@ public class ChaqueService extends MasterService{
 	
 	private int initSequenceVar() {
 		List<SettlementSequence> sl = this.sequenceRepo.findAll() ; 
-		if(sl.size() == 0 ) 
-			this.sequenceVar = 0 ; 
+		if(sl.size() == 0 )
+			this.sequenceVar = 0 ;
 		else 
 			this.sequenceVar = sl.get(sl.size()-1).getSequenceNum()+1 ;
 		return this.sequenceVar ; 
@@ -154,19 +162,91 @@ public class ChaqueService extends MasterService{
 	}
 
 	public void injectData() {
-		/*for(int i = 0 ; i < 30 ; i ++) {
-		Chaque check = new  Chaque(i, "التجاري", "المركزي", "الزراعة",
-				"#combr1","دمشق", "#cbr1", 1000+i,
-				MasterService.getCurrDateTime(), "admin",i, false); 
-		this.chaqueRepo.save(check);
-		}
-		for(int i = 0 ; i < 30 ; i ++) {
-			Chaque check = new  Chaque(i,"المركزي" ,"التجاري","دمشق",
-					"#cbr1","الزراعة", "#combr1", 200+i,
-					MasterService.getCurrDateTime(), "test",i, false); 
+		List<RTGSUser> usersList = this.userSerivce.getTestUsers() ; 
+		int maxRandomizer = usersList.size() ; 
+		
+		for(int i = 0 ; i < 50 ; i ++) {
+			int indexfrom = ThreadLocalRandom.current().nextInt(1,maxRandomizer);
+			int indexto = -1 ; 
+			if(indexto == -1 ) {
+				indexto = ThreadLocalRandom.current().nextInt(1,maxRandomizer);
+				while(indexto == indexfrom) {
+					indexto = ThreadLocalRandom.current().nextInt(1,maxRandomizer);
+				}
+			}
+			long amount = ThreadLocalRandom.current().nextLong(100000,800000000) ; 
+			Chaque check = new  Chaque(i, usersList.get(indexfrom).getBankName(),usersList.get(indexto).getBankName()
+					, usersList.get(indexfrom).getBranchName(),
+					usersList.get(indexfrom).getBranchCode(),usersList.get(indexto).getBranchName(),usersList.get(indexto).getBranchCode()
+					,amount,
+					MasterService.getDateTimeAsString(),usersList.get(indexto).getUsername(),usersList.get(indexto).getId()
+					, false);
+			initSequenceVar() ; 
+			SettlementSequence sq = new SettlementSequence() ; 
+			check.setSequenceNum(this.sequenceVar);
+			sq.setSequenceNum(check.getSequenceNum());
+			this.sequenceRepo.save(sq);
 			this.chaqueRepo.save(check);
-			}*/
+		
+		}
+		System.out.println("checks injection finished ");
 	}
 
+	//add schedule  to this method 
+	public void sendHoldChecks() {
+		try {
+		for(Chaque check : this.chaqueRepo.findBysentFalse()) {
+			this.orderMessageSender.sendOrder(check);
+			check.setSent(true);
+			this.chaqueRepo.save(check);
+		}
+		System.out.println("sending process done !");
+		}catch(Exception e ) {
+			System.out.println("error happened when sending the checks to MSG Q ");
+			e.printStackTrace();
+		}
+	}
+	
+	public List<SettlementReportModel> getAllReports(){
+		return this.settlementReportRepo.findAll();
+	}
+
+	public List<Chaque> getUserChecks(int srm){
+		SettlementReportModel srModel = this.settlementReportRepo.findById(srm);
+		List<Chaque> srmList = this.chaqueRepo.findBysettlementReportModel(srModel);
+		List<Chaque> userChecksList = new ArrayList<Chaque>() ; 
+		RTGSUser currentUser = super.get_current_User() ; 
+		if(currentUser == null ) {
+			return null ; 
+		}
+		for(Chaque check : srmList ) {
+			if(check.getSecondBranchCode().equalsIgnoreCase(currentUser.getBranchCode()))
+				userChecksList.add(check);
+		}
+		return userChecksList; 
+	}
+	
+	
+	List<SettledChaque> getUserSettledChecks(int srm ){
+		SettlementReportModel srModel = this.settlementReportRepo.findById(srm);
+		List<SettledChaque> allSrmChecks = this.settledChecksRepo.findBysettlementReportModel(srModel);
+		RTGSUser currentUser = super.get_current_User() ; 
+		if(currentUser == null) {
+			return null ; 
+		}
+		List<SettledChaque> userSettledChecks = new ArrayList<SettledChaque>() ; 
+		for(SettledChaque check : allSrmChecks) {
+			if(check.getSecondBranchCode().equalsIgnoreCase(currentUser.getBranchCode()))
+				userSettledChecks.add(check);
+		}
+		return userSettledChecks ;  
+	}
+
+	public void saveCheckFromMsgQ(Chaque chaque) {
+			Chaque check = this.chaqueRepo.findBysequenceNum(chaque.getSequenceNum());
+			this.chaqueRepo.save(check);
+		
+	}
+	
 	
 }

@@ -1,14 +1,14 @@
 package com.RTGS;
 
 import com.RTGS.Settlement.Chaque;
-import com.RTGS.Settlement.ChaqueRepository;
+import com.RTGS.Settlement.ChaqueService;
 import com.RTGS.Settlement.settledChecks.SettledChaque;
 import com.RTGS.Settlement.settledChecks.SettledChecksRepository;
-import com.RTGS.Settlement.settlementReport.SettlementReportRepository;
+import com.RTGS.Settlement.settlementReport.SettlementReportModel;
+import com.RTGS.Settlement.settlementReport.SettlementReportsService;
 import com.RTGS.security.users.RTGSUser;
 import com.RTGS.security.users.UserRepository;
 
-import org.hibernate.annotations.Check;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -24,20 +24,26 @@ public class OrderMessageListener {
     private UserRepository userRepo ; 
     
     @Autowired 
-    private ChaqueRepository checkRepo ; 
+    private ChaqueService checkService ; 
     
     @Autowired
-    private SettlementReportRepository reportsRepo ; 
+    private SettlementReportsService reportsService ; 
     
     @Autowired 
     private SettledChecksRepository settledChecksRepo ; 
     
+    private boolean proccessing = false ; 
+    
     @RabbitListener(queues = "CheckQ2")
     public void processOrderCheck(Chaque chaque) {
-        System.out.println("check recieved with info : " + chaque.toString());
-        this.reportsRepo.save(chaque.getSettlementReportModel());
-        this.checkRepo.save(chaque);
-        logger.info("check Received: " + chaque);
+    	while(proccessing) {}//wait
+    		proccessing = true ; 
+	        System.out.println("check recieved with info : " + chaque.toString());
+	        SettlementReportModel settlementReportFromService = this.reportsService.addSettlementModel(chaque.getSettlementReportModel());
+	        chaque.setSettlementReportModel(settlementReportFromService);
+	        this.checkService.saveCheckFromMsgQ(chaque);
+	        logger.info("check Received: " + chaque);
+	        proccessing = false ; 
     }
     @RabbitListener(queues = "RTGSUserQ")
     public void processOrderUsers(RTGSUser rtgsUser) {
@@ -47,9 +53,13 @@ public class OrderMessageListener {
     }
     @RabbitListener(queues = "SettledChaqueQ")
     public void processOrderSettledCheck(SettledChaque settledChaque) {
+    	while(proccessing) {}//wait
+		proccessing = true ; 
         System.out.println("check recieved with info : " + settledChaque.toString());
-        this.reportsRepo.save(settledChaque.getSettlementReportModel());
+        SettlementReportModel settlementReportFromService = this.reportsService.addSettlementModel(settledChaque.getSettlementReportModel());
+        settledChaque.setSettlementReportModel(settlementReportFromService);
         this.settledChecksRepo.save(settledChaque);
         logger.info("Settled check Received: " + settledChaque);
+        proccessing = false ;
     }
 }

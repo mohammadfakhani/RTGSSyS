@@ -212,14 +212,34 @@ public class UserService extends MasterService {
 	
 	public void injectUsers() { 
 		RTGSUser admin = new RTGSUser("mohammed_.1996@live.com",passwordEncoder.encode("admin123"),"admin","دمشق", 
-				"المركزي","#cbr1","male","ACCESS_TEST1,ACCESS_TEST2","ADMIN",MasterService.getDateAsString(),true);
+				"المركزي","#cbr0","male","ACCESS_TEST1","ADMIN",MasterService.getDateAsString(),true);
 		this.userRepository.save(admin);
-		RTGSUser b1 = new RTGSUser("tadeMail@gmail.com",passwordEncoder.encode("admin123"),"user1","الزراعة", 
-				"التجاري","#combr1","male","EMPLOYEE","USER",MasterService.getDateAsString(),true);
+		RTGSUser b1 = new RTGSUser("build1@gmail.com",passwordEncoder.encode("admin123"),"user1","المزرعة", 
+				"التجاري","#cbr1","male","EMPLOYEE","USER",MasterService.getDateAsString(),true);
 		this.userRepository.save(b1);
-		RTGSUser b2 = new RTGSUser("build@gmail.com",passwordEncoder.encode("admin123"),"user2","المزة", 
-				"العقاري","#abr1","male","EMPLOYEE","USER",MasterService.getDateAsString(),true);
+		RTGSUser b2 = new RTGSUser("build2@gmail.com",passwordEncoder.encode("admin123"),"user2","المزة", 
+				"الاسلامي","#cbr2","male","EMPLOYEE","USER",MasterService.getDateAsString(),true);
 		this.userRepository.save(b2);
+		RTGSUser b3 = new RTGSUser("build3@gmail.com",passwordEncoder.encode("admin123"),"user3","المزة", 
+				"العقاري","#cbr3","male","EMPLOYEE","USER",MasterService.getDateAsString(),true);
+		this.userRepository.save(b3);
+		RTGSUser b4 = new RTGSUser("build4@gmail.com",passwordEncoder.encode("admin123"),"user4","العدوي", 
+				"الاستثماري","#cbr4","male","EMPLOYEE","USER",MasterService.getDateAsString(),true);
+		this.userRepository.save(b4);
+		RTGSUser b5 = new RTGSUser("build5@gmail.com",passwordEncoder.encode("admin123"),"user5","ركن الدين", 
+				"الزراعي","#cbr5","male","EMPLOYEE","USER",MasterService.getDateAsString(),true);
+		this.userRepository.save(b5);
+		RTGSUser b6 = new RTGSUser("build6@gmail.com",passwordEncoder.encode("admin123"),"user6","الزاهرة", 
+				"الشعبي","#cbr6","male","EMPLOYEE","USER",MasterService.getDateAsString(),true);
+		this.userRepository.save(b6);
+		RTGSUser b7 = new RTGSUser("build7@gmail.com",passwordEncoder.encode("admin123"),"user7","المرجة", 
+				"البركة","#cbr7","male","EMPLOYEE","USER",MasterService.getDateAsString(),true);
+		this.userRepository.save(b7);
+		
+	}
+	
+	public List<RTGSUser> getTestUsers(){
+		return this.userRepository.findAll();
 	}
 	
 	public List<String> getSettlementBanks(){
