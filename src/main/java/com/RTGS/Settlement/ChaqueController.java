@@ -72,15 +72,15 @@ public class ChaqueController {
 	
 	@RequestMapping(method = RequestMethod.GET , value = "/settlements/reports/checks/{id}")
 	public ModelAndView getSettlementReportsFromCheck(@PathVariable int id ) {
-		ModelAndView mav = new ModelAndView("settlements/SettledReportsList");
-		mav.addObject("reportsList", this.chaqueService.getUserSettledChecks(id));
+		ModelAndView mav = new ModelAndView("settlements/settledChecksList");
+		mav.addObject("checksList", this.chaqueService.getUserChecks(id));
 		return mav ; 
 	}
 	
 	@RequestMapping(method = RequestMethod.GET , value = "/settlements/reports/settlementReport/{id}")
 	public ModelAndView getSettlementCheck(@PathVariable int id ) {
-		ModelAndView mav = new ModelAndView("settlements/allreports");
-		mav.addObject("checksList", this.chaqueService.getUserChecks(id));
+		ModelAndView mav = new ModelAndView("settlements/SettledReportsList");
+		mav.addObject("reportsList", this.chaqueService.getUserSettledChecks(id));
 		return mav; 
 	}
 	
