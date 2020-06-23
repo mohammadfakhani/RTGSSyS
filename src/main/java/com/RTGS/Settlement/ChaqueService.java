@@ -165,7 +165,8 @@ public class ChaqueService extends MasterService{
 		List<RTGSUser> usersList = this.userSerivce.getTestUsers() ; 
 		int maxRandomizer = usersList.size() ; 
 		
-		for(int i = 0 ; i < 50 ; i ++) {
+		for(int i = 0 ; i < 20 ; i ++) {
+			System.out.println("inject check "+i);
 			int indexfrom = ThreadLocalRandom.current().nextInt(1,maxRandomizer);
 			int indexto = -1 ; 
 			if(indexto == -1 ) {
@@ -214,7 +215,7 @@ public class ChaqueService extends MasterService{
 	public List<Chaque> getUserChecks(int srm){
 		SettlementReportModel srModel = this.settlementReportRepo.findById(srm);
 		List<Chaque> srmList = this.chaqueRepo.findBysettlementReportModel(srModel);
-		List<Chaque> userChecksList = new ArrayList<Chaque>() ; 
+		List<Chaque> userChecksList = new ArrayList<Chaque>(); 
 		RTGSUser currentUser = super.get_current_User() ; 
 		if(currentUser == null ) {
 			return null ; 
@@ -236,16 +237,18 @@ public class ChaqueService extends MasterService{
 		}
 		List<SettledChaque> userSettledChecks = new ArrayList<SettledChaque>() ; 
 		for(SettledChaque check : allSrmChecks) {
-			if(check.getSecondBranchCode().equalsIgnoreCase(currentUser.getBranchCode()))
+			if(check.getSecondBranchCode().equalsIgnoreCase(currentUser.getBranchCode())) {
 				userSettledChecks.add(check);
+				}
 		}
 		return userSettledChecks ;  
 	}
 
 	public void saveCheckFromMsgQ(Chaque chaque) {
-			Chaque check = this.chaqueRepo.findBysequenceNum(chaque.getSequenceNum());
+			Chaque check = this.chaqueRepo.findBysequenceNum(chaque.getSequenceNum());			
+			check.setActive(chaque.isActive());
+			check.setSettlementReportModel(chaque.getSettlementReportModel());
 			this.chaqueRepo.save(check);
-		
 	}
 	
 	
