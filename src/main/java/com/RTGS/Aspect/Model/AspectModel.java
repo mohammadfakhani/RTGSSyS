@@ -27,7 +27,21 @@ public class AspectModel {
 	
 	@Before("execution(* com.RTGS.Settlement.ChaqueController..*(..)))")
 	public void secureUserService(JoinPoint  proceedingJoinPoint)  {
-			System.out.println("intercepting user Controller methods ");
+			System.out.println("intercepting Chaque Controller methods ");
+			printFunctionCallInfo(proceedingJoinPoint);
+			RTGSUser user = get_current_User();   
+			if(!checkUserTokenState(user)) {
+				throw new UnAuthenticatedException();
+			}
+	}
+	
+	@Before("execution(* com.RTGS.HomeController..*(..)))")
+	public void secureHome(JoinPoint  proceedingJoinPoint)  {
+			System.out.println("intercepting Home Controller methods ");
+			MethodSignature methodSignature = (MethodSignature) proceedingJoinPoint.getSignature();
+			if(methodSignature.getName().equalsIgnoreCase("login")) {
+				return ;
+			}
 			printFunctionCallInfo(proceedingJoinPoint);
 			RTGSUser user = get_current_User();   
 			if(!checkUserTokenState(user)) {

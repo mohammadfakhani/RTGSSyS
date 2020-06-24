@@ -8,9 +8,21 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 public class HomeController {
 
-	 @RequestMapping(method = RequestMethod.GET , value = "/login")
+	 	@RequestMapping(method = RequestMethod.GET , value = "/login")
 	    public ModelAndView login() {
 	    	ModelAndView mav = new ModelAndView("Login/login");
+	    	return mav; 
+	    }
+	 	
+	 	@RequestMapping(method = RequestMethod.GET , value = "/index")
+	    public ModelAndView welcome() {
+	    	ModelAndView mav = new ModelAndView("Login/welcome");
+	    	return mav; 
+	    }
+	 	
+	 	@RequestMapping(method = RequestMethod.GET , value = "/")
+	    public ModelAndView welcomeIndex() {
+	    	ModelAndView mav = new ModelAndView("Login/welcome");
 	    	return mav; 
 	    }
    

@@ -1,6 +1,7 @@
 package com.RTGS.Aspect.Model.exceptions;
 
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,17 +20,32 @@ public class ExceptionsHandler {
 	@ExceptionHandler(value = UnAuthenticatedException.class)
 	public ModelAndView handleExceptions(){
 		System.out.println("Exceptions handlerinvoked ");
-		ModelAndView mav = new ModelAndView("exceptions/exception");
-		mav.addObject("cerror",new UnAuthenticatedException());
+		ModelAndView mav = new ModelAndView("Login/login");
+		//ModelAndView mav = new ModelAndView("exceptions/exception");
+		//mav.addObject("cerror",new UnAuthenticatedException());
 		return mav ; 
 	}
 
 	@ExceptionHandler(value = UnAuthorizedException.class)
 	public ModelAndView UnAuthorizedException(){
 		System.out.println("Exceptions handlerinvoked ");
-		ModelAndView mav = new ModelAndView("exceptions/exception");
-		mav.addObject("cerror",new UnAuthorizedException());
+		ModelAndView mav = new ModelAndView("Login/login");
+		//ModelAndView mav = new ModelAndView("exceptions/exception");
+		//mav.addObject("cerror",new UnAuthorizedException());
 		return mav ; 
 	}
+	
+	@ExceptionHandler(value = HttpRequestMethodNotSupportedException.class)
+	public ModelAndView notAllowedExceptionHandler(){
+		System.out.println("NotAllowed Exceptions handlerinvoked ");
+		ModelAndView mav = new ModelAndView("exceptions/exception");
+		mav.addObject("cerror",new NAllowedEX());
+		return mav ; 
+	}
+	
+	
+	
+	
+	
 	
 }
