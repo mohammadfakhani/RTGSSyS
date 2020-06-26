@@ -165,7 +165,7 @@ public class ChaqueService extends MasterService{
 		List<RTGSUser> usersList = this.userSerivce.getTestUsers() ; 
 		int maxRandomizer = usersList.size() ; 
 		
-		for(int i = 0 ; i < 20 ; i ++) {
+		for(int i = 0 ; i < 5000 ; i ++) {
 			System.out.println("inject check "+i);
 			int indexfrom = ThreadLocalRandom.current().nextInt(1,maxRandomizer);
 			int indexto = -1 ; 

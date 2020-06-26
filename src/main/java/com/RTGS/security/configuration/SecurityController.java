@@ -1,5 +1,9 @@
 package com.RTGS.security.configuration;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
@@ -26,14 +30,15 @@ public class SecurityController {
     
     
     @RequestMapping(method = RequestMethod.POST , value = "/tsa/otp")
-    public ModelAndView confirmUserToken(@ModelAttribute Token token) {
+    public void confirmUserToken(@ModelAttribute Token token,HttpServletResponse response) throws IOException {
     	boolean result = userService.validateUserToken(token.getToken());
     	if(result) {//token is true
-    		ModelAndView mav = new ModelAndView("Login/welcome");
-        	return mav ; 
+    		response.sendRedirect("/index");
     	} else {//redirect to tsa 
-    		return authunticateUser();
+    		response.sendRedirect("/tsa");
     	}
     }
+    
+    
     
 }
