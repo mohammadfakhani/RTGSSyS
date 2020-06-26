@@ -21835,13 +21835,13 @@ dl li {
 }
 
 .auth.lock-full-bg {
-  background: url("../images/auth/lockscreen-bg.jpg");
-  background-size: cover;
+  background: url("../images/auth/BankToBank.jpeg");
+  background-size:  100% 100%;
 }
 
 .auth.lock-full-bg2 {
-  background: url("../images/61d99106452473cd3a9b4cd1a4f767f8_upscaled_image_x4.jpg");
-  background-size: 100% 100%;
+  background: url("../images/lockscreen-bg.jpg");
+  background-size: 200% 75%;
 }
 
 .auth .lock-profile-img {
