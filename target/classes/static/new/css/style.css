@@ -21837,7 +21837,7 @@ dl li {
 .auth.lock-full-bg {
   background: url("../images/auth/1c8ad03c252782b85920f6a528215cbc.gif");
 
-  background-size: cover;
+  background-size: 100%100%;
 }
 
 .auth.lock-full-bg2 {
