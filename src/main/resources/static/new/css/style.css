@@ -9207,8 +9207,7 @@ pre code {
 
 .container {
   width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
+
   margin-right: auto;
   margin-left: auto;
 }
@@ -21835,7 +21834,7 @@ dl li {
 }
 
 .auth.lock-full-bg {
-  background: url("../images/auth/1c8ad03c252782b85920f6a528215cbc.gif");
+  background: url("../images/auth/psd-2-api.gif");
 
   background-size: 100%100%;
 }
