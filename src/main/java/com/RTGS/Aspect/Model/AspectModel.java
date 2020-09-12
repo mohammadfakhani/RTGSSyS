@@ -19,7 +19,7 @@ import com.RTGS.security.users.UserRepository;
 @Component
 @EnableAspectJAutoProxy
 public class AspectModel {
-	
+	/*
 	@Autowired
 	private UserRepository userRepo ; 
 
@@ -91,5 +91,5 @@ public class AspectModel {
         }
         return out ; 
 	}
-	
+	*/
 }

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -49,9 +51,22 @@ public class ChaqueService extends MasterService{
 	@Autowired
 	private SequenceRepo sequenceRepo ; 
 	
-	private int sequenceVar = -1 ; 
+	private static int sequenceVar = -1 ; 
 	
+	private static boolean SequenceLock = true ; 
 	
+	@PostConstruct
+	public void initSequence() {
+		System.out.println("sequence init >>>>>>>>>>>>>>>>>>>>>>>>>>>");
+		List<SettlementSequence> sl = sequenceRepo.findAll() ; 
+		if(sl.size() == 0 ) {
+			sequenceVar = 0 ;
+			}
+		else { 
+			sequenceVar = sl.get(sl.size()-1).getSequenceNum()+1 ;
+			}
+		System.out.println("sequence value "+sequenceVar);
+	}
 	
 	public List<Chaque> getAllChecks(int PageNumber){
 		Pageable paging = PageRequest.of(PageNumber, 20, Sort.by("id"));
@@ -68,10 +83,12 @@ public class ChaqueService extends MasterService{
 		chaque.setSecondBankName(user.getBankName());
 		chaque.setSecondBranchName(user.getBranchName());
 		chaque.setSecondBranchCode(user.getBranchCode());
-		initSequenceVar() ; 
+		chaque = initSequenceVar(chaque) ; 
+		
 		SettlementSequence sq = new SettlementSequence() ; 
-		chaque.setSequenceNum(this.sequenceVar);
+		//chaque.setSequenceNum(this.sequenceVar);
 		sq.setSequenceNum(chaque.getSequenceNum());
+		
 		this.sequenceRepo.save(sq);
 		String result = validateChaqueData(chaque) ; 
 		
@@ -94,13 +111,17 @@ public class ChaqueService extends MasterService{
 		}
 	}
 	
-	private int initSequenceVar() {
-		List<SettlementSequence> sl = this.sequenceRepo.findAll() ; 
-		if(sl.size() == 0 )
-			this.sequenceVar = 0 ;
-		else 
-			this.sequenceVar = sl.get(sl.size()-1).getSequenceNum()+1 ;
-		return this.sequenceVar ; 
+
+	private static synchronized Chaque initSequenceVar(Chaque check) {
+		while(!SequenceLock) {
+			System.out.println("waiting...");//wait
+		}
+		SequenceLock = false ;
+		check.setSequenceNum(sequenceVar);
+		sequenceVar++ ; 
+		SequenceLock = true ; 
+		return check ; 
+	
 	}
 	
 	private String validateChaqueData(Chaque check) {
@@ -165,8 +186,8 @@ public class ChaqueService extends MasterService{
 		List<RTGSUser> usersList = this.userSerivce.getTestUsers() ; 
 		int maxRandomizer = usersList.size() ; 
 		
-		for(int i = 0 ; i < 5000 ; i ++) {
-			System.out.println("inject check "+i);
+		for(int i = 0 ; i < 1 ; i ++) {
+			//System.out.println("inject check "+i);
 			int indexfrom = ThreadLocalRandom.current().nextInt(1,maxRandomizer);
 			int indexto = -1 ; 
 			if(indexto == -1 ) {
@@ -182,15 +203,15 @@ public class ChaqueService extends MasterService{
 					,amount,
 					MasterService.getDateTimeAsString(),usersList.get(indexto).getUsername(),usersList.get(indexto).getId()
 					, false);
-			initSequenceVar() ; 
+			check = initSequenceVar(check) ; 
 			SettlementSequence sq = new SettlementSequence() ; 
-			check.setSequenceNum(this.sequenceVar);
+			//check.setSequenceNum(this.sequenceVar);
 			sq.setSequenceNum(check.getSequenceNum());
-			this.sequenceRepo.save(sq);
+			sequenceRepo.save(sq);
 			this.chaqueRepo.save(check);
 		
 		}
-		System.out.println("checks injection finished ");
+	//	System.out.println("checks injection finished ");
 	}
 
 	//add schedule  to this method 
@@ -251,5 +272,30 @@ public class ChaqueService extends MasterService{
 			this.chaqueRepo.save(check);
 	}
 	
+	
+	public void stressTest() {
+		 long startTime = System.nanoTime();
+		//  System.out.println("thread started");
+		  injectData();
+		  long stopTime = System.nanoTime();
+		  long result = stopTime - startTime ; 
+		 // System.out.println("thread finished with exe time : "+result);
+		  
+		/*
+		for(int threadNum = 0 ; threadNum < 500 ; threadNum ++ ) {
+			final int threadN = threadNum ; 
+		(new Thread() {
+			  public void run() {
+				  long startTime = System.nanoTime();
+				  System.out.println("thread "+threadN +" started");
+				  injectData();
+				  long stopTime = System.nanoTime();
+				  long result = stopTime - startTime ; 
+				  System.out.println("thread "+threadN+" finished with exe time : "+result);
+			  }
+			 }).start();
+		}
+	*/
+	}
 	
 }

@@ -21836,7 +21836,7 @@ dl li {
 .auth.lock-full-bg {
   background: url("../images/auth/psd-2-api.gif");
 
-  background-size: cover;
+  background-size: 100%100%;
 }
 
 .auth.lock-full-bg2 {

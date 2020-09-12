@@ -284,6 +284,7 @@ public class UserService extends MasterService {
 	}
 	
 	public boolean validateUserToken(String token) {
+
 		RTGSUser currUser = super.get_current_User() ; 
 		if(currUser.validateToken(token)) {
 			currUser.setTokenEntered(true);
