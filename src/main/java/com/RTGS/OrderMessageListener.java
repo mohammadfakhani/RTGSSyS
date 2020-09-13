@@ -42,9 +42,11 @@ public class OrderMessageListener {
 	        //logger.info("check Received: " + chaque);
 	        System.out.println("check status "+chaque.isActive());
 	        System.out.println("srModel "+chaque.getSettlementReportModel().getTimestamp());
+	        
 	        SettlementReportModel settlementReportFromService = this.reportsService.addSettlementModel(chaque.getSettlementReportModel());
 	        chaque.setSettlementReportModel(settlementReportFromService);
 	        this.checkService.saveCheckFromMsgQ(chaque);
+	        
 	        processing = false ; 
     }
 

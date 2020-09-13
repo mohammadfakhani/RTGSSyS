@@ -11,28 +11,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.RTGS.MasterService;
+import com.RTGS.Facade.Facade;
 
 @RestController
 public class ChaqueController {
 
-	@Autowired 
-	private ChaqueService chaqueService ; 
-	
+	@Autowired
+	private Facade facade;
 	
 	@RequestMapping(method = RequestMethod.GET ,value = "/settlements/checks/all")
 	public ModelAndView getChecks(@Param(value ="index") int index) {
 		ModelAndView mav = new ModelAndView("settlements/allChecks");
-		List<Chaque> allChecksList = this.chaqueService.getAllChecks(index);
+		List<Chaque> allChecksList = facade.getAllChecks(index);
 		mav.addObject("checksList",allChecksList);
-		if(allChecksList.size() > 0 ) {
-			MasterService.addSequesnceVaraibles(mav, index);
-		}else {
-			MasterService.addSequesnceVaraibles(mav, -1);
-		}
+		mav = facade.addSequenceVariable(index,mav,allChecksList);
 		return mav ; 
 	}
 	
+	/*
+	 
 	@RequestMapping(method = RequestMethod.GET , value = "/settlements/test/inject")
 	public ModelAndView injectTestData() {
 		this.chaqueService.injectData() ; 
@@ -45,10 +42,11 @@ public class ChaqueController {
 		return "succ";
 	}
 	
+	*/
 	
 	@RequestMapping(method = RequestMethod.GET , value = "/settlements/test/sendhold")
 	public ModelAndView sendTestData() {
-		this.chaqueService.sendHoldChecks(); 
+		facade.sendOnHoldChecks(); 
 		return this.success("test data sended ");
 	}
 	
@@ -61,11 +59,10 @@ public class ChaqueController {
 	
 	@RequestMapping(method = RequestMethod.POST , value = "/settlements/checks/add")
 	public ModelAndView addNewCheckResponse(@ModelAttribute Chaque chaque) {
-		String result = this.chaqueService.addCheck(chaque);
+		String result = facade.addCheck(chaque);
 		if(!result.equalsIgnoreCase("ok")) {
 			return failView(result); 
 		}else {
-			//send to msgQ 
 		return this.success("تمت إضافة الشيك بنجاح");
 		}
 	}
@@ -74,21 +71,21 @@ public class ChaqueController {
 	@RequestMapping(method = RequestMethod.GET , value = "/settlements/reports")
 	public ModelAndView getSettlementReports() {
 		ModelAndView mav = new ModelAndView("settlements/allreports");
-		mav.addObject("reportsList",this.chaqueService.getAllReports());
+		mav.addObject("reportsList",facade.getAllSettlementReports());
 		return mav; 
 	}
 	
 	@RequestMapping(method = RequestMethod.GET , value = "/settlements/reports/checks/{id}")
 	public ModelAndView getSettlementReportsFromCheck(@PathVariable int id ) {
 		ModelAndView mav = new ModelAndView("settlements/settledChecksList");
-		mav.addObject("checksList", this.chaqueService.getUserChecks(id));
+		mav.addObject("checksList", facade.getUserChecksFromReportID(id));
 		return mav ; 
 	}
 	
 	@RequestMapping(method = RequestMethod.GET , value = "/settlements/reports/settlementReport/{id}")
 	public ModelAndView getSettlementCheck(@PathVariable int id ) {
 		ModelAndView mav = new ModelAndView("settlements/SettledReportsList");
-		mav.addObject("reportsList", this.chaqueService.getUserSettledChecks(id));
+		mav.addObject("reportsList", facade.getUserSettledChecksFromReportID(id));
 		return mav; 
 	}
 	
@@ -101,6 +98,7 @@ public class ChaqueController {
 	}
 	
 	private ModelAndView failView(String result) {
+		System.out.println("res : "+result);
 		ModelAndView  mav = new ModelAndView("settlements/fail");
 		mav.addObject("msg", result);
 		return mav ; 

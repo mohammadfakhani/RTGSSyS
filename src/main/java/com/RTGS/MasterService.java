@@ -25,7 +25,7 @@ public class MasterService {
 	 
 	}
 	
-	protected RTGSUser get_current_User() {
+	public RTGSUser get_current_User() {
 		String username ; 
     	 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	        Object principal =  auth.getPrincipal();
