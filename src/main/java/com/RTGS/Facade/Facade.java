@@ -1,5 +1,6 @@
 package com.RTGS.Facade;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,9 @@ import com.RTGS.Settlement.ChaqueService;
 import com.RTGS.Settlement.ValidationService;
 import com.RTGS.Settlement.sequence.SequecnceService;
 import com.RTGS.Settlement.settledChecks.SettledChaque;
+import com.RTGS.Settlement.settledChecks.SettledChecksService;
 import com.RTGS.Settlement.settlementReport.SettlementReportModel;
+import com.RTGS.Settlement.settlementReport.SettlementReportsService;
 import com.RTGS.security.users.RTGSUser;
 import com.RTGS.security.users.UserService;
 
@@ -39,8 +42,16 @@ public class Facade {
 	@Autowired
 	private OrderMessageSender orderMessageSender ; 
 	
+	@Autowired
+    private SettlementReportsService reportsService ;
 	
+	@Autowired
+	private SettledChecksService settledChaqueService ; 
 	
+	@Autowired
+	private SettlementReportsService settlementReportsService ;  
+	
+	//Services Flow
 	
 	public String addCheck(Chaque chaque) {
 			RTGSUser user =  masterService.get_current_User() ; 
@@ -74,7 +85,67 @@ public class Facade {
 				System.out.println("error happened when sending the checks to MSG Q ");
 			}
 	}
+
+	public void recieveSettlementResultReports(SettledChaque settledChaque) {
+		SettlementReportModel settlementReportFromService = reportsService.addSettlementModel(settledChaque.getSettlementReportModel());
+		settledChaque.setSettlementReportModel(settlementReportFromService);
+		settledChaqueService.saveSettledCheck(settledChaque);
+	}
 	
+	public void recieveSettlementResultChecks(Chaque chaque) {
+		SettlementReportModel settlementReportFromService = reportsService.addSettlementModel(chaque.getSettlementReportModel());
+        chaque.setSettlementReportModel(settlementReportFromService);
+        chaqueService.saveCheckFromMsgQ(chaque);
+		
+	}
+	
+	public void recieveRTGSUsersFromMaster(RTGSUser rtgsUser) {
+		userService.addUserFromMaster(rtgsUser);
+	}
+	
+	public List<Chaque> getUserChecks(int settlementReportModelID){
+		
+		 SettlementReportModel srModel = settlementReportsService.findById(settlementReportModelID);
+		
+		List<Chaque> srmList = chaqueService.findBySettlementReportModel(srModel);
+		
+		List<Chaque> userChecksList = new ArrayList<Chaque>(); 
+		
+		RTGSUser currentUser = masterService.get_current_User(); 
+		
+		if(currentUser == null ) {
+			return null ; 
+		}
+		for(Chaque check : srmList ) {
+			if(check.getSecondBranchCode().equalsIgnoreCase(currentUser.getBranchCode()))
+				userChecksList.add(check);
+		}
+		return userChecksList;
+	}
+	
+	public List<SettledChaque> getUserSettledChecks(int settlementReportModelID ){
+		
+		SettlementReportModel srModel = settlementReportsService.findById(settlementReportModelID);
+		
+		List<SettledChaque> allSrmChecks = settledChaqueService.findBysettlementReportModel(srModel);
+		
+		RTGSUser currentUser = masterService.get_current_User() ; 
+		
+		if(currentUser == null) {
+			return null ; 
+		}
+		List<SettledChaque> userSettledChecks = new ArrayList<SettledChaque>() ; 
+		for(SettledChaque check : allSrmChecks) {
+			if(check.getSecondBranchCode().equalsIgnoreCase(currentUser.getBranchCode())) {
+				userSettledChecks.add(check);
+				}
+		}
+		return userSettledChecks ;  
+	}
+
+	
+	
+	//Operational 
 	public List<Chaque> getAllChecks(int index ){
 		return chaqueService.getAllChecks(index);
 		
@@ -90,7 +161,7 @@ public class Facade {
 	}
 	
 	public List<SettlementReportModel> getAllSettlementReports(){
-		return chaqueService.getAllReports();
+		return settlementReportsService.getAllReports();
 	}
 	
 	public List<Chaque> getUserChecksFromReportID(int reportId){
@@ -101,6 +172,9 @@ public class Facade {
 		return chaqueService.getUserSettledChecks(reportID);
 	}
 	
+	
+	
+	//synchronized
 	private static synchronized Chaque initSequenceVar(Chaque check) {
 			while(!SequecnceService.isSequenceLock()) {
 				System.out.println("waiting...");//wait
@@ -113,7 +187,41 @@ public class Facade {
 			SequecnceService.setSequenceLock(true);
 			return check ; 
 		}
+
 	
 	
+	
+	
+	
+	//getters 
+	
+	public SequecnceService getSequenceService() {
+		return sequenceService;
+	}
+
+	public ChaqueService getChaqueService() {
+		return chaqueService;
+	}
+
+	public ValidationService getValidationService() {
+		return validationService;
+	}
+
+	public UserService getUserService() {
+		return userService;
+	}
+
+	public SettlementReportsService getReportsService() {
+		return reportsService;
+	}
+
+	public SettledChecksService getSettledChaqueService() {
+		return settledChaqueService;
+	}
+
+	public SettlementReportsService getSettlementReportsService() {
+		return settlementReportsService;
+	}
+
 	
 }

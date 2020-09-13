@@ -10,24 +10,18 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.RTGS.MasterService;
+import com.RTGS.Facade.Facade;
 import com.RTGS.Settlement.settledChecks.SettledChaque;
-import com.RTGS.Settlement.settledChecks.SettledChecksRepository;
 import com.RTGS.Settlement.settlementReport.SettlementReportModel;
-import com.RTGS.Settlement.settlementReport.SettlementReportRepository;
-import com.RTGS.security.users.RTGSUser;
 
 @Service
 public class ChaqueService extends MasterService{
 
 	@Autowired 
 	private ChaqueRepository chaqueRepo ; 
-
-	@Autowired 
-	private SettlementReportRepository settlementReportRepo ; 
 	
 	@Autowired 
-	private SettledChecksRepository settledChecksRepo ; 
-	
+	private Facade facade ; 
 	
 	public List<Chaque> getAllChecks(int PageNumber){
 		Pageable paging = PageRequest.of(PageNumber, 20, Sort.by("id"));
@@ -92,47 +86,22 @@ public class ChaqueService extends MasterService{
 	}
 
 	
-	
 	public List<Chaque> getOnHoldChecks(){
 		return this.chaqueRepo.findBysentFalse() ; 
 	}
-
-		
 	
-	public List<SettlementReportModel> getAllReports(){
-		return this.settlementReportRepo.findAll();
-	}
 
 	public List<Chaque> getUserChecks(int srm){
-		SettlementReportModel srModel = this.settlementReportRepo.findById(srm);
-		List<Chaque> srmList = this.chaqueRepo.findBysettlementReportModel(srModel);
-		List<Chaque> userChecksList = new ArrayList<Chaque>(); 
-		RTGSUser currentUser = super.get_current_User() ; 
-		if(currentUser == null ) {
-			return null ; 
-		}
-		for(Chaque check : srmList ) {
-			if(check.getSecondBranchCode().equalsIgnoreCase(currentUser.getBranchCode()))
-				userChecksList.add(check);
-		}
-		return userChecksList; 
+		return facade.getUserChecks(srm);
+	}
+	
+	public List<Chaque> findBySettlementReportModel(SettlementReportModel srModel){
+		return chaqueRepo.findBysettlementReportModel(srModel);
 	}
 	
 	
 	public List<SettledChaque> getUserSettledChecks(int srm ){
-		SettlementReportModel srModel = this.settlementReportRepo.findById(srm);
-		List<SettledChaque> allSrmChecks = this.settledChecksRepo.findBysettlementReportModel(srModel);
-		RTGSUser currentUser = super.get_current_User() ; 
-		if(currentUser == null) {
-			return null ; 
-		}
-		List<SettledChaque> userSettledChecks = new ArrayList<SettledChaque>() ; 
-		for(SettledChaque check : allSrmChecks) {
-			if(check.getSecondBranchCode().equalsIgnoreCase(currentUser.getBranchCode())) {
-				userSettledChecks.add(check);
-				}
-		}
-		return userSettledChecks ;  
+		return facade.getUserSettledChecks(srm);
 	}
 
 	public void saveCheckFromMsgQ(Chaque chaque) {

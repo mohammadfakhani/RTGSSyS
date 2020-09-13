@@ -25,6 +25,10 @@ public class UserService extends MasterService {
 	}
 	//
 	
+	public void addUserFromMaster(RTGSUser user) {
+		this.userRepository.save(user);
+	}
+	
 	//all Users// 
 	public List<RTGSUser> getAllUsers() {
 		return this.userRepository.findAll();

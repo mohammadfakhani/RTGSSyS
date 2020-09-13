@@ -1,5 +1,7 @@
 package com.RTGS.Settlement.settlementReport;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,4 +20,15 @@ public class SettlementReportsService {
 		}
 		return settlementReportModel ; 
 	}
+	
+	public List<SettlementReportModel> getAllReports(){
+		return this.settlementReportsRepo.findAll();
+	}
+
+	
+	public SettlementReportModel findById(int settlementReportModelID) {
+		return settlementReportsRepo.findById(settlementReportModelID);
+	}
+
+	
 }

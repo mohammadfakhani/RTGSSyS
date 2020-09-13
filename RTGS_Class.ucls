@@ -1,187 +1,674 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.4" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
   realizations="true" associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="com.RTGS.Facade.Facade" project="RTGSSyS" 
+  <class id="1" language="java" name="com.RTGS.OrderMessageListener" project="RTGSSyS" 
+    file="/RTGSSyS/src/main/java/com/RTGS/OrderMessageListener.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="8380" y="1737"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="com.RTGS.OrderMessageSender" project="RTGSSyS" 
+    file="/RTGSSyS/src/main/java/com/RTGS/OrderMessageSender.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="8394" y="2073"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="com.RTGS.Aspect.enc.IntEncryptDecryptConverter" project="RTGSSyS" 
+    file="/RTGSSyS/src/main/java/com/RTGS/Aspect/enc/IntEncryptDecryptConverter.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3770" y="3280"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="com.RTGS.Aspect.enc.LongEncryptDecryptConverter" project="RTGSSyS" 
+    file="/RTGSSyS/src/main/java/com/RTGS/Aspect/enc/LongEncryptDecryptConverter.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4051" y="3280"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="com.RTGS.Aspect.enc.CipherMaker" project="RTGSSyS" 
+    file="/RTGSSyS/src/main/java/com/RTGS/Aspect/enc/CipherMaker.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4329" y="3271"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="com.RTGS.Aspect.enc.StringEncryptDecryptConverter" project="RTGSSyS" 
+    file="/RTGSSyS/src/main/java/com/RTGS/Aspect/enc/StringEncryptDecryptConverter.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4608" y="3280"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="com.RTGS.Aspect.enc.AbstractEncryptDecryptConverter" project="RTGSSyS" 
+    file="/RTGSSyS/src/main/java/com/RTGS/Aspect/enc/AbstractEncryptDecryptConverter.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4354" y="2955"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="com.RTGS.Aspect.enc.DoubleEncryptDecryptConverter" project="RTGSSyS" 
+    file="/RTGSSyS/src/main/java/com/RTGS/Aspect/enc/DoubleEncryptDecryptConverter.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4896" y="3280"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="com.RTGS.Facade.Facade" project="RTGSSyS" 
     file="/RTGSSyS/src/main/java/com/RTGS/Facade/Facade.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="326" y="-16"/>    
+    <position height="-1" width="-1" x="7323" y="1879"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="com.RTGS.security.users.RTGSUser" project="RTGSSyS" 
+  <interface id="10" language="java" name="com.RTGS.OTPGENERATOR.OTPGENERATE" project="RTGSSyS" 
+    file="/RTGSSyS/src/main/java/com/RTGS/OTPGENERATOR/OTPGENERATE.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="5435" y="1187"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="11" language="java" name="com.RTGS.OTPGENERATOR.OtpMethods" project="RTGSSyS" 
+    file="/RTGSSyS/src/main/java/com/RTGS/OTPGENERATOR/OtpMethods.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="5427" y="981"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="com.RTGS.security.configuration.UserPrincipal" project="RTGSSyS" 
+    file="/RTGSSyS/src/main/java/com/RTGS/security/configuration/UserPrincipal.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4186" y="1126"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="com.RTGS.security.configuration.SecurityController" project="RTGSSyS" 
+    file="/RTGSSyS/src/main/java/com/RTGS/security/configuration/SecurityController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="6984" y="1262"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="com.RTGS.security.configuration.SecurityConfiguration" project="RTGSSyS" 
+    file="/RTGSSyS/src/main/java/com/RTGS/security/configuration/SecurityConfiguration.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="6110" y="771"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="com.RTGS.security.configuration.UserPrincipalDetailsService" project="RTGSSyS" 
+    file="/RTGSSyS/src/main/java/com/RTGS/security/configuration/UserPrincipalDetailsService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="6554" y="846"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="com.RTGS.security.users.RTGSUser" project="RTGSSyS" 
     file="/RTGSSyS/src/main/java/com/RTGS/security/users/RTGSUser.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1907" y="100"/>    
+    <position height="-1" width="-1" x="4960" y="1136"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="com.RTGS.security.users.UserService" project="RTGSSyS" 
+  <class id="17" language="java" name="com.RTGS.security.users.Token" project="RTGSSyS" 
+    file="/RTGSSyS/src/main/java/com/RTGS/security/users/Token.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="7006" y="865"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="com.RTGS.security.users.UserController" project="RTGSSyS" 
+    file="/RTGSSyS/src/main/java/com/RTGS/security/users/UserController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="7384" y="1392"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="com.RTGS.security.users.UserService" project="RTGSSyS" 
     file="/RTGSSyS/src/main/java/com/RTGS/security/users/UserService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1103" y="-199"/>    
+    <position height="-1" width="-1" x="6439" y="1625"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="4" language="java" name="com.RTGS.security.users.UserRepository" project="RTGSSyS" 
+  <interface id="20" language="java" name="com.RTGS.security.users.UserRepository" project="RTGSSyS" 
     file="/RTGSSyS/src/main/java/com/RTGS/security/users/UserRepository.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1428" y="-279"/>    
+    <position height="-1" width="-1" x="6471" y="1136"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="5" language="java" name="com.RTGS.Settlement.ValidationService" project="RTGSSyS" 
+  <class id="21" language="java" name="com.RTGS.SendingOTP.Email" project="RTGSSyS" 
+    file="/RTGSSyS/src/main/java/com/RTGS/SendingOTP/Email.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="5680" y="972"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="com.RTGS.SendingOTP.Message" project="RTGSSyS" 
+    file="/RTGSSyS/src/main/java/com/RTGS/SendingOTP/Message.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="5713" y="1376"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="com.RTGS.SendingOTP.MessageFactory" project="RTGSSyS" 
+    file="/RTGSSyS/src/main/java/com/RTGS/SendingOTP/MessageFactory.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="6104" y="1204"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="com.RTGS.Settlement.ValidationService" project="RTGSSyS" 
     file="/RTGSSyS/src/main/java/com/RTGS/Settlement/ValidationService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="266" y="568"/>    
+    <position height="-1" width="-1" x="6429" y="2675"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="6" language="java" name="com.RTGS.Settlement.ChaqueRepository" project="RTGSSyS" 
+  <interface id="25" language="java" name="com.RTGS.Settlement.ChaqueRepository" project="RTGSSyS" 
     file="/RTGSSyS/src/main/java/com/RTGS/Settlement/ChaqueRepository.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2165" y="1144"/>    
+    <position height="-1" width="-1" x="6795" y="3262"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="7" language="java" name="com.RTGS.Settlement.ChaqueController" project="RTGSSyS" 
+  <class id="26" language="java" name="com.RTGS.Settlement.ChaqueController" project="RTGSSyS" 
     file="/RTGSSyS/src/main/java/com/RTGS/Settlement/ChaqueController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1008" y="1282"/>    
+    <position height="-1" width="-1" x="7159" y="2711"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="com.RTGS.Settlement.ChaqueService" project="RTGSSyS" 
+  <class id="27" language="java" name="com.RTGS.Settlement.ChaqueService" project="RTGSSyS" 
     file="/RTGSSyS/src/main/java/com/RTGS/Settlement/ChaqueService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1670" y="1101"/>    
+    <position height="-1" width="-1" x="6803" y="2729"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="com.RTGS.Settlement.Chaque" project="RTGSSyS" 
+  <class id="28" language="java" name="com.RTGS.Settlement.Chaque" project="RTGSSyS" 
     file="/RTGSSyS/src/main/java/com/RTGS/Settlement/Chaque.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="981" width="408" x="2922" y="750"/>    
+    <position height="-1" width="-1" x="5373" y="3020"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="10" language="java" name="com.RTGS.Settlement.sequence.SettlementSequence" project="RTGSSyS" 
+  <class id="29" language="java" name="com.RTGS.Settlement.sequence.SettlementSequence" project="RTGSSyS" 
     file="/RTGSSyS/src/main/java/com/RTGS/Settlement/sequence/SettlementSequence.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-447" y="77"/>    
+    <position height="-1" width="-1" x="5698" y="2743"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="11" language="java" name="com.RTGS.Settlement.sequence.SequecnceService" project="RTGSSyS" 
+  <class id="30" language="java" name="com.RTGS.Settlement.sequence.SequecnceService" project="RTGSSyS" 
     file="/RTGSSyS/src/main/java/com/RTGS/Settlement/sequence/SequecnceService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-216" y="113"/>    
+    <position height="-1" width="-1" x="6003" y="2706"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="12" language="java" name="com.RTGS.Settlement.sequence.SequenceRepo" project="RTGSSyS" 
+  <interface id="31" language="java" name="com.RTGS.Settlement.sequence.SequenceRepo" project="RTGSSyS" 
     file="/RTGSSyS/src/main/java/com/RTGS/Settlement/sequence/SequenceRepo.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-257" y="306"/>    
+    <position height="-1" width="-1" x="6002" y="2979"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <association id="13">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="14" name="validationService"/>      
-      <multiplicity id="15" minimum="0" maximum="1"/>    
+  <interface id="32" language="java" name="com.RTGS.Settlement.settledChecks.SettledChecksRepository" project="RTGSSyS" 
+    file="/RTGSSyS/src/main/java/com/RTGS/Settlement/settledChecks/SettledChecksRepository.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="8210" y="3120"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="33" language="java" name="com.RTGS.Settlement.settledChecks.SettledChecksService" project="RTGSSyS" 
+    file="/RTGSSyS/src/main/java/com/RTGS/Settlement/settledChecks/SettledChecksService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="8220" y="2785"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="34" language="java" name="com.RTGS.Settlement.settledChecks.SettledChaque" project="RTGSSyS" 
+    file="/RTGSSyS/src/main/java/com/RTGS/Settlement/settledChecks/SettledChaque.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="4768" y="2213"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="35" language="java" name="com.RTGS.Settlement.settlementReport.SettlementReportModel" project="RTGSSyS" 
+    file="/RTGSSyS/src/main/java/com/RTGS/Settlement/settlementReport/SettlementReportModel.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="5400" y="2176"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="36" language="java" name="com.RTGS.Settlement.settlementReport.SettlementReportsService" project="RTGSSyS" 
+    file="/RTGSSyS/src/main/java/com/RTGS/Settlement/settlementReport/SettlementReportsService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="7636" y="2743"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="37" language="java" name="com.RTGS.Settlement.settlementReport.SettlementReportRepository" 
+    project="RTGSSyS" file="/RTGSSyS/src/main/java/com/RTGS/Settlement/settlementReport/SettlementReportRepository.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="7607" y="3149"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <association id="38">    
+    <end type="SOURCE" refId="28" navigable="false">      
+      <attribute id="39" name="settlementReportModel">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="40" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
+    <end type="TARGET" refId="35" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="16">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="17" name="sequenceService"/>      
-      <multiplicity id="18" minimum="0" maximum="1"/>    
+  <generalization id="41">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="7"/>  
+  </generalization>  
+  <association id="42">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="43" name="validationService">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="44" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="45">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="23"/>  
+  </dependency>  
+  <association id="46">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="47" name="otpMethods">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="48" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="11" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="19">    
+  <generalization id="49">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="7"/>  
+  </generalization>  
+  <dependency id="50">    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="29"/>  
+  </dependency>  
+  <dependency id="51">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="29"/>  
+  </dependency>  
+  <association id="52">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="53" name="settledChaqueService">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="54" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="55">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="56" name="userService">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="57" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="58">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="20" name="userService"/>      
-      <multiplicity id="21" minimum="0" maximum="1"/>    
+      <attribute id="59" name="facade">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="60" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
+    <end type="TARGET" refId="9" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="22">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="23" name="chaqueService"/>      
-      <multiplicity id="24" minimum="0" maximum="1"/>    
+  <generalization id="61">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="7"/>  
+  </generalization>  
+  <association id="62">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="63" name="reportsService">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="64" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
+    <end type="TARGET" refId="36" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="25">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="26" name="userRepository"/>      
-      <multiplicity id="27" minimum="0" maximum="1"/>    
+  <association id="65">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="66" name="userService">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="67" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
+    <end type="TARGET" refId="19" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="28">    
+  <association id="68">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="69" name="userRepository">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="70" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="71">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="72" name="userRepository">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="73" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="74">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="75" name="orderMessageSender">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="76" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="77">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="22"/>  
+  </dependency>  
+  <generalization id="78">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="22"/>  
+  </generalization>  
+  <association id="79">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="80" name="chaqueService">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="81" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="82">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="7"/>  
+  </generalization>  
+  <association id="83">    
     <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="29" name="facade"/>      
-      <multiplicity id="30" minimum="0" maximum="1"/>    
+      <attribute id="84" name="cipherMaker">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="85" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
+    <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="31">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="32" name="chaqueRepo"/>      
-      <multiplicity id="33" minimum="0" maximum="1"/>    
+  <association id="86">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="87" name="user">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="88" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
+    <end type="TARGET" refId="16" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="34">    
-    <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="35" name="sequenceRepo"/>      
-      <multiplicity id="36" minimum="0" maximum="1"/>    
+  <association id="89">    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="90" name="facade">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="91" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
+    <end type="TARGET" refId="9" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="37">    
-    <bendpoint x="1322" y="1196"/>    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="38" name="chaqueService"/>      
-      <multiplicity id="39" minimum="0" maximum="1"/>    
+  <association id="92">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="93" name="userPrincipalDetailsService">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="94" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="95">    
+    <end type="SOURCE" refId="27" navigable="false">      
+      <attribute id="96" name="chaqueRepo">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="97" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="98">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="17"/>  
+  </dependency>  
+  <association id="99">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="100" name="settledChecksRepo">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="101" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="32" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="102">    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="103" name="sequenceRepo">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="104" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="31" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="105">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="10"/>  
+  </realization>  
+  <association id="106">    
+    <end type="SOURCE" refId="34" navigable="false">      
+      <attribute id="107" name="settlementReportModel">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="108" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="35" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="109">    
+    <end type="SOURCE" refId="36" navigable="false">      
+      <attribute id="110" name="settlementReportsRepo">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="111" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="37" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="112">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="113" name="userService">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="114" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="115">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="116" name="sequenceService">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="117" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
