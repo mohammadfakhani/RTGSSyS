@@ -14,7 +14,7 @@ public class SettlementReportsService {
 	
 	public SettlementReportModel addSettlementModel(SettlementReportModel settlementReportModel ) {
 		if(this.settlementReportsRepo.findBytimestamp(settlementReportModel.getTimestamp()) == null ) {
-			this.settlementReportsRepo.save(settlementReportModel); 
+			settlementReportModel = this.settlementReportsRepo.save(settlementReportModel);
 		}else {
 			settlementReportModel = this.settlementReportsRepo.findBytimestamp(settlementReportModel.getTimestamp());
 		}

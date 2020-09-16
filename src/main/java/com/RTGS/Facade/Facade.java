@@ -2,6 +2,7 @@ package com.RTGS.Facade;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -12,6 +13,7 @@ import com.RTGS.MasterService;
 import com.RTGS.OrderMessageSender;
 import com.RTGS.Settlement.Chaque;
 import com.RTGS.Settlement.ChaqueService;
+import com.RTGS.Settlement.ChecksSendingModel;
 import com.RTGS.Settlement.ValidationService;
 import com.RTGS.Settlement.sequence.SequecnceService;
 import com.RTGS.Settlement.settledChecks.SettledChaque;
@@ -57,7 +59,6 @@ public class Facade {
 			RTGSUser user =  masterService.get_current_User() ; 
 			chaqueService.setCheckUserData(chaque,user.getBankName(),user.getBranchName(),user.getBranchCode(),user.getId(),user.getUsername());
 			chaque = initSequenceVar(chaque) ; 
-			sequenceService.addNewSequence(chaque.getSequenceNum());
 			String result = validationService.validateCheckData(chaque,userService.getAllUsers(),chaqueService.findByCheckID(chaque.getCheckId()));
 			if(result.equalsIgnoreCase("ok")) {
 				try {
@@ -66,6 +67,7 @@ public class Facade {
 				}catch(Exception e ){
 					chaque.setSent(false);
 				}
+				sequenceService.addNewSequence(chaque.getSequenceNum());
 				chaqueService.addCheck(chaque);
 			}
 		return result ; 
@@ -92,10 +94,19 @@ public class Facade {
 		settledChaqueService.saveSettledCheck(settledChaque);
 	}
 	
-	public void recieveSettlementResultChecks(Chaque chaque) {
-		SettlementReportModel settlementReportFromService = reportsService.addSettlementModel(chaque.getSettlementReportModel());
-        chaque.setSettlementReportModel(settlementReportFromService);
-        chaqueService.saveCheckFromMsgQ(chaque);
+	public void recieveSettlementResultChecks(ChecksSendingModel checkSendingModel) {
+		SettlementReportModel settlementReportFromService = reportsService.addSettlementModel(checkSendingModel.getSettlementReportModel());
+		System.out.println("TS : "+checkSendingModel.getSettlementReportModel().getTimestamp());
+		System.out.println("Sequence : "+checkSendingModel.getChecksSequence());
+		for(String sequenceNumber : checkSendingModel.getChecksSequence().split(",")) {
+			Chaque check = this.chaqueService.findBySequenceNumber(Integer.valueOf(sequenceNumber));
+			if(check != null ) {
+				check.setSettlementReportModel(settlementReportFromService);
+				check.setActive(true);
+				chaqueService.saveCheckFromMsgQ(check);
+			}
+		}
+        
 		
 	}
 	
@@ -223,5 +234,55 @@ public class Facade {
 		return settlementReportsService;
 	}
 
+	
+	
+	
+	
+	
+	/////test section 
+	
+	public void stressTest() {
+		 long startTime = System.nanoTime();
+		  System.out.println("process started");
+		  injectData();
+		  long stopTime = System.nanoTime();
+		  long result = stopTime - startTime ; 
+		  System.out.println("process finished with exe time : "+result);
+	}
+	
+	
+	public void injectData() {
+		
+		List<RTGSUser> usersList = userService.getTestUsers() ; 
+		int maxRandomizer = usersList.size() ; 
+		
+		for(int i = 0 ; i < 50 ; i ++) {
+			//System.out.println("inject check "+i);
+			int indexfrom = ThreadLocalRandom.current().nextInt(1,maxRandomizer);
+			int indexto = -1 ; 
+			if(indexto == -1 ) {
+				indexto = ThreadLocalRandom.current().nextInt(1,maxRandomizer);
+				while(indexto == indexfrom) {
+					indexto = ThreadLocalRandom.current().nextInt(1,maxRandomizer);
+				}
+			}
+			long amount = ThreadLocalRandom.current().nextLong(100000,800000000) ; 
+			Chaque check = new  Chaque(i, usersList.get(indexfrom).getBankName(),usersList.get(indexto).getBankName()
+					, usersList.get(indexfrom).getBranchName(),
+					usersList.get(indexfrom).getBranchCode(),usersList.get(indexto).getBranchName(),usersList.get(indexto).getBranchCode()
+					,amount,
+					MasterService.getDateTimeAsString(),usersList.get(indexto).getUsername(),usersList.get(indexto).getId()
+					, false);
+			check = initSequenceVar(check) ; 
+			sequenceService.addNewSequence(check.getSequenceNum());
+			orderMessageSender.sendOrder(check);
+			check.setSent(true);
+			chaqueService.addCheck(check);
+		}
+		System.out.println("checks injection finished ");
+	}
+
+	
+	
 	
 }

@@ -50,40 +50,7 @@ public class ChaqueService extends MasterService{
 		return this.chaqueRepo.findBycheckId(checkID) ;
 	}
 	
-	
-	public void injectData() {
-			/*
-		List<RTGSUser> usersList = this.userSerivce.getTestUsers() ; 
-		int maxRandomizer = usersList.size() ; 
-		
-		for(int i = 0 ; i < 1 ; i ++) {
-			System.out.println("inject check "+i);
-			int indexfrom = ThreadLocalRandom.current().nextInt(1,maxRandomizer);
-			int indexto = -1 ; 
-			if(indexto == -1 ) {
-				indexto = ThreadLocalRandom.current().nextInt(1,maxRandomizer);
-				while(indexto == indexfrom) {
-					indexto = ThreadLocalRandom.current().nextInt(1,maxRandomizer);
-				}
-			}
-			long amount = ThreadLocalRandom.current().nextLong(100000,800000000) ; 
-			Chaque check = new  Chaque(i, usersList.get(indexfrom).getBankName(),usersList.get(indexto).getBankName()
-					, usersList.get(indexfrom).getBranchName(),
-					usersList.get(indexfrom).getBranchCode(),usersList.get(indexto).getBranchName(),usersList.get(indexto).getBranchCode()
-					,amount,
-					MasterService.getDateTimeAsString(),usersList.get(indexto).getUsername(),usersList.get(indexto).getId()
-					, false);
-			check = initSequenceVar(check) ; 
-			SettlementSequence sq = new SettlementSequence() ; 
-			//check.setSequenceNum(this.sequenceVar);
-			sq.setSequenceNum(check.getSequenceNum());
-			sequenceRepo.save(sq);
-			this.chaqueRepo.save(check);
-		
-		}
-		System.out.println("checks injection finished ");
-		*/
-	}
+
 
 	
 	public List<Chaque> getOnHoldChecks(){
@@ -103,38 +70,17 @@ public class ChaqueService extends MasterService{
 	public List<SettledChaque> getUserSettledChecks(int srm ){
 		return facade.getUserSettledChecks(srm);
 	}
+	
+	public Chaque findBySequenceNumber(int sequenceNumber) {
+		return this.chaqueRepo.findBysequenceNum(sequenceNumber);
+	}
 
 	public void saveCheckFromMsgQ(Chaque chaque) {
-			Chaque check = this.chaqueRepo.findBysequenceNum(chaque.getSequenceNum());			
-			check.setActive(chaque.isActive());
-			check.setSettlementReportModel(chaque.getSettlementReportModel());
-			this.chaqueRepo.save(check);
+			//Chaque check = this.chaqueRepo.findBysequenceNum(chaque.getSequenceNum());			
+			//check.setActive(chaque.isActive());
+			//check.setSettlementReportModel(chaque.getSettlementReportModel());
+			this.chaqueRepo.save(chaque);
 	}
-	
-	
-	public void stressTest() {
-		 long startTime = System.nanoTime();
-		  System.out.println("thread started");
-		  injectData();
-		  long stopTime = System.nanoTime();
-		  long result = stopTime - startTime ; 
-		  System.out.println("thread finished with exe time : "+result);
-		  
-		/*
-		for(int threadNum = 0 ; threadNum < 500 ; threadNum ++ ) {
-			final int threadN = threadNum ; 
-		(new Thread() {
-			  public void run() {
-				  long startTime = System.nanoTime();
-				  System.out.println("thread "+threadN +" started");
-				  injectData();
-				  long stopTime = System.nanoTime();
-				  long result = stopTime - startTime ; 
-				  System.out.println("thread "+threadN+" finished with exe time : "+result);
-			  }
-			 }).start();
-		}
-	*/
-	}
+
 	
 }

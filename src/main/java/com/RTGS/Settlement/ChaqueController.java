@@ -35,14 +35,15 @@ public class ChaqueController {
 		this.chaqueService.injectData() ; 
 		return this.success("test data added ");
 	}
+	*/
 	
 	@RequestMapping(method = RequestMethod.GET , value = "/settlements/test/load")
 	public String stresTest() {
-		this.chaqueService.stressTest() ;
+		facade.stressTest() ;
 		return "succ";
 	}
 	
-	*/
+	
 	
 	@RequestMapping(method = RequestMethod.GET , value = "/settlements/test/sendhold")
 	public ModelAndView sendTestData() {

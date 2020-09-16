@@ -260,6 +260,25 @@ public class UserService extends MasterService {
 		RTGSUser b14 = new RTGSUser("build14@gmail.com",passwordEncoder.encode("admin123"),"user14","المرجة", 
 				"السعودي","#cbr14","male","EMPLOYEE","USER",MasterService.getDateAsString(),true);
 		this.userRepository.save(b14);
+		RTGSUser b15 = new RTGSUser("build15@gmail.com",passwordEncoder.encode("admin123"),"user15","المزة", 
+				"الاردني","#cbr15","male","EMPLOYEE","USER",MasterService.getDateAsString(),true);
+		this.userRepository.save(b15);
+		RTGSUser b16 = new RTGSUser("build16@gmail.com",passwordEncoder.encode("admin123"),"user16","المهاجرين", 
+				"البحريني","#cbr16","male","EMPLOYEE","USER",MasterService.getDateAsString(),true);
+		this.userRepository.save(b16);
+		RTGSUser b17 = new RTGSUser("build17@gmail.com",passwordEncoder.encode("admin123"),"user17","المرجة", 
+				"اللبناني","#cbr17","male","EMPLOYEE","USER",MasterService.getDateAsString(),true);
+		this.userRepository.save(b17);
+		RTGSUser b18 = new RTGSUser("build18@gmail.com",passwordEncoder.encode("admin123"),"user18","القصاع", 
+				"الإماراتي","#cbr18","male","EMPLOYEE","USER",MasterService.getDateAsString(),true);
+		this.userRepository.save(b18);
+		RTGSUser b19 = new RTGSUser("build19@gmail.com",passwordEncoder.encode("admin123"),"user19","العدوي", 
+				"الكندي","#cbr19","male","EMPLOYEE","USER",MasterService.getDateAsString(),true);
+		this.userRepository.save(b19);
+		RTGSUser b20 = new RTGSUser("build20@gmail.com",passwordEncoder.encode("admin123"),"user20","المرجة", 
+				"العراقي","#cbr20","male","EMPLOYEE","USER",MasterService.getDateAsString(),true);
+		this.userRepository.save(b20);
+		
 		
 	}
 	
