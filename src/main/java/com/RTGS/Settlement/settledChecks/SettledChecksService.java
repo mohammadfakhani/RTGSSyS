@@ -22,4 +22,8 @@ public class SettledChecksService {
 		return settledChecksRepo.findBysettlementReportModel(srModel);
 	}
 	
+	public List<SettledChaque> findAll(){
+		return this.settledChecksRepo.findAll();
+	}
+	
 }

@@ -234,13 +234,8 @@ public class Facade {
 		return settlementReportsService;
 	}
 
-	
-	
-	
-	
-	
 	/////test section 
-	
+
 	public void stressTest() {
 		 long startTime = System.nanoTime();
 		  System.out.println("process started");

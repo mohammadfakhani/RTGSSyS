@@ -1,6 +1,8 @@
 package com.RTGS.Settlement;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -57,7 +59,9 @@ public class Chaque implements Serializable {
 	
     @Column(nullable = false )
     private  String localDateTime ;
-  
+    
+    @Column(nullable = false )
+    private  String CheckEntryDate ;
     
     @Column(nullable = false )
     @Convert(converter = StringEncryptDecryptConverter.class)
@@ -80,7 +84,9 @@ public class Chaque implements Serializable {
 	private SettlementReportModel settlementReportModel = null ;
 	
 	
-	public Chaque() {}
+	public Chaque() {
+		this.CheckEntryDate = LocalDate.now().toString();
+	}
 	
 	public Chaque(int checkId, String firstBankName, String secondBankName, String firstBranchName,
 			String firstBranchCode, String secondBranchName, String secondBranchCode, long amount,
@@ -99,6 +105,7 @@ public class Chaque implements Serializable {
 		UserID = userID;
 		this.active = active;
 		this.ClientAccountNumber = ClientAccountNumber ; 
+		this.CheckEntryDate = LocalDate.now().toString();
 	}
 
 
@@ -236,6 +243,14 @@ public class Chaque implements Serializable {
 		ClientAccountNumber = clientAccountNumber;
 	}
 	
+	public String getCheckEntryDate() {
+		return CheckEntryDate;
+	}
+
+	public void setCheckEntryDate(String checkEntryDate) {
+		CheckEntryDate = checkEntryDate;
+	}
+
 	@Override 
 	public String toString() {
 		return "check id : "+this.checkId + "first bank name  : "+this.firstBankName+
