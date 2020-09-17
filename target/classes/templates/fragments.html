@@ -185,6 +185,21 @@
             <nav class="bottom-navbar">
                 <div class="container">
                     <ul class="nav page-navigation">
+
+              <li class="nav-item" sec:authorize="hasAnyAuthority('ADMIN')">
+                <a   href="#" class="nav-link">
+                  <i class="mdi mdi-human-male-female menu-icon"></i>
+                  <span class="menu-title">المستخدمين</span>
+                </a>
+				 <div class="submenu">
+	                      <ul>
+	                          <li class="nav-item" sec:authorize="hasAnyAuthority('ADMIN','SUPER')"><a class="nav-link" href="/adminstration/users/all">كل المستخدمين</a></li>
+	                          <li class="nav-item" sec:authorize="hasAnyAuthority('ADMIN','SUPER')"><a class="nav-link" href="/adminstration/users/active">الحسابات النشطة</a></li>
+	                          <li class="nav-item" sec:authorize="hasAnyAuthority('ADMIN','SUPER')"><a class="nav-link" href="/adminstration/users/nonactive">الحسابات غيرالنشطة</a></li>
+	                      </ul>
+	                  </div>
+	              </li>                         
+
                         <li class="nav-item">
                             <a   href="/settlements/checks/add" class="nav-link">
                                 <i class="mdi mdi-note-plus-outline menu-icon"></i>

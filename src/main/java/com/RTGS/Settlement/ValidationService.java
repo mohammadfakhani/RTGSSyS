@@ -38,7 +38,11 @@ public class ValidationService {
 		}
 
 		if(prevCheck != null) {
-			return "الرقم التسلسلي للشيك مدخل مسبقا";  
+			if(prevCheck.getClientAccountNumber() == check.getClientAccountNumber()) {
+				if(prevCheck.getFirstBankName().equalsIgnoreCase(check.getFirstBankName())) {
+					return "الشيك تم إدخاله مسبقا على النظام";
+				}
+			}
 		}
 		
 		return "ok" ; 

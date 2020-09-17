@@ -272,9 +272,10 @@ public class Facade {
 					usersList.get(indexfrom).getBranchCode(),usersList.get(indexto).getBranchName(),usersList.get(indexto).getBranchCode()
 					,amount,
 					MasterService.getDateTimeAsString(),usersList.get(indexto).getUsername(),usersList.get(indexto).getId()
-					, false);
+					, false,0000001+i);
 			check = initSequenceVar(check) ; 
 			sequenceService.addNewSequence(check.getSequenceNum());
+			check.setCheckId(check.getSequenceNum());
 			orderMessageSender.sendOrder(check);
 			check.setSent(true);
 			chaqueService.addCheck(check);

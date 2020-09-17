@@ -38,21 +38,25 @@
                 <div class="card-body">
                   <div class="form-group">
                    <label for="exampleInputPassword1">رقم الشيك التسلسلي</label>
-                   <input type="number" max="999999999" name="checkId" class="form-control" placeholder="Enter User Name" th:field="*{checkId}">
+                   <input type="number" max="999999999" name="checkId" class="form-control" th:field="*{checkId}">
                   </div>
                   <hr>
 					<div class="form-group">
                    <label for="exampleInputPassword1">اسم المصرف الأول (المصرف المصدر للشيك )</label>
-                   <input type="text" name="firstBankName" class="form-control" placeholder="Enter User Email" th:field="*{firstBankName}">
+                   <input type="text" name="firstBankName" class="form-control" th:field="*{firstBankName}">
                   </div>
                   <div class="form-group">
                    <label for="exampleInputPassword1">اسم االفرع الأول</label>
-                   <input type="text" name="FirstBranchName" class="form-control" placeholder="Enter User Email" th:field="*{FirstBranchName}">
+                   <input type="text" name="FirstBranchName" class="form-control" th:field="*{FirstBranchName}">
                   </div>
 					<hr>
-				 	<div class="form-group">
+				 <div class="form-group">
                    <label for="exampleInputPassword1">رمز الفرع الأول</label>
-                   <input type="text" name="FirstBranchCode" class="form-control" placeholder="Enter User Email" th:field="*{FirstBranchCode}">
+                   <input type="text" name="FirstBranchCode" class="form-control" th:field="*{FirstBranchCode}">
+                  </div>
+                  <div class="form-group">
+                   <label for="exampleInputPassword1">رقم الحساب</label>
+                   <input type="text" name="ClientAccountNumber" class="form-control" th:field="*{ClientAccountNumber}">
                   </div>
                   <div class="form-group">
                     <label for="exampleInputEmail1">تاريخ الشيك  </label>
@@ -60,7 +64,7 @@
                   </div>
                   <div class="form-group">
                    <label for="exampleInputPassword1">القيمة</labela>
-                   <input type="number" max="999999999999999999" name="Amount" class="form-control" placeholder="Enter User Email" th:field="*{Amount}">
+                   <input type="number" max="999999999999999999" name="Amount" class="form-control" th:field="*{Amount}">
                   </div>
                          
                 </div>
