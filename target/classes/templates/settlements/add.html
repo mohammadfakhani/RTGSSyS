@@ -33,16 +33,15 @@
               <div class="card-header">
               <h4>معلومات الشيك</h4>
               </div>
-              <hr>
                 <form  action="#" th:action="@{/settlements/checks/add}" th:object="${check}" method="post">
                 <div class="card-body">
                   <div class="form-group">
                    <label for="exampleInputPassword1">رقم الشيك التسلسلي</label>
                    <input type="number" max="999999999" name="checkId" class="form-control" th:field="*{checkId}" required>
                   </div>
-                  <hr>
+ 
                    <div class="form-group">
-                       <label class="col-sm-3 col-form-label">البنك المصدر للشيك</label>
+                       <label>البنك المصدر للشيك</label>
                            <div class="col-sm-9">
                                 <select class="form-control" th:field="*{FirstBranchName}" >
                                      <option th:each="bank : ${banksList}"
@@ -51,7 +50,7 @@
                                 </select>
                            </div>
                     </div>
-					<hr>
+					
                   <div class="form-group">
                    <label for="exampleInputPassword1">رقم الحساب</label>
                    <input type="text" name="ClientAccountNumber" class="form-control" th:field="*{ClientAccountNumber}" required>
