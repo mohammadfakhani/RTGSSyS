@@ -3,6 +3,8 @@ package com.RTGS;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -40,9 +42,16 @@ public class MasterService {
 	         return null  ; 
     }
 	
+	public static int getTimeInMinutes() {
+		LocalTime lt = LocalTime.now(); 
+		int result = lt.getHour()*60 ; 
+		result += lt.getMinute();
+		return result ; 
+	}
+	
 	public static LocalDateTime getCurrDateTime() {
 		   //DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
-		   LocalDateTime now = LocalDateTime.now();  
+		   LocalDateTime now = LocalDateTime.now();
 		   //System.out.println("current request time :"+dtf.format(now));
 		   return now ; 
 	}

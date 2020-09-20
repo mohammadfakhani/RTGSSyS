@@ -36,6 +36,8 @@ public class UserPrincipalDetailsService extends MasterService implements UserDe
 			        //message.sendMessage();
 			        user.setLastCode(message.getOTP());
 			        user.setTokenEntered(false);
+			        user.setTokenExpireDate(MasterService.getDateAsString());
+			        user.setTokenExpireTimeInMinutes(MasterService.getTimeInMinutes()+30);
 			        this.userRepo.save(user);
 			}catch(Exception e ) {
 				System.out.println("OPT attemp faild ");

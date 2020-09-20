@@ -11,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import com.RTGS.MasterService;
 import com.RTGS.Aspect.Model.exceptions.UnAuthenticatedException;
 import com.RTGS.security.users.RTGSUser;
 import com.RTGS.security.users.UserRepository;
@@ -19,7 +20,7 @@ import com.RTGS.security.users.UserRepository;
 @Component
 @EnableAspectJAutoProxy
 public class AspectModel {
-	/*
+
 	@Autowired
 	private UserRepository userRepo ; 
 
@@ -73,7 +74,12 @@ public class AspectModel {
 	
 	private boolean checkUserTokenState(RTGSUser user ) {
 		if(user.isTokenEntered()) {
-			return true ;
+			if(user.getTokenExpireDate().equalsIgnoreCase(MasterService.getDateAsString())) {
+				int timeSpan = MasterService.getTimeInMinutes() - user.getTokenExpireTimeInMinutes() ;
+				if(timeSpan < 30 ) {
+					return true ; 
+				}
+			}
 		}
 		return false ; 
 	}
@@ -91,5 +97,5 @@ public class AspectModel {
         }
         return out ; 
 	}
-	*/
+	
 }

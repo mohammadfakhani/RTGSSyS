@@ -1,5 +1,6 @@
 package com.RTGS.Settlement;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.RTGS.Facade.Facade;
+import com.RTGS.security.users.RTGSUser;
 
 @RestController
 public class ChaqueController {
@@ -54,6 +56,14 @@ public class ChaqueController {
 	@RequestMapping(method = RequestMethod.GET , value = "/settlements/checks/add")
 	public ModelAndView addNewCheckRequest() {
 		ModelAndView mav = new ModelAndView("settlements/add");
+		List<RTGSUser> usersList = facade.getUserService().getAllUsers(); 
+		List<RTGSUser> usersFilteredList = new ArrayList<RTGSUser>() ; 
+		for(RTGSUser user :usersList) {
+			if(!user.getUsername().equalsIgnoreCase("admin")) {
+				usersFilteredList.add(user);
+			}
+		}
+		mav.addObject("banksList", usersFilteredList);
 		mav.addObject("check", new Chaque());
 		return mav ; 
 	}

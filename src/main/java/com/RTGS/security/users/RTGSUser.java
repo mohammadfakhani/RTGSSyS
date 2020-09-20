@@ -42,6 +42,10 @@ public class RTGSUser implements java.io.Serializable {
 	@Convert(converter = StringEncryptDecryptConverter.class)
 	private String lastCode = "" ; 
 	
+	private String TokenExpireDate ; 
+	
+	private int TokenExpireTimeInMinutes ;  
+	
 	private boolean tokenEntered = false ; 
 	
 	private boolean sent ; 
@@ -289,6 +293,23 @@ public class RTGSUser implements java.io.Serializable {
 	public void setSent(boolean sent) {
 		this.sent = sent;
 	}
+
+	public String getTokenExpireDate() {
+		return TokenExpireDate;
+	}
+
+	public void setTokenExpireDate(String tokenExpireDate) {
+		TokenExpireDate = tokenExpireDate;
+	}
+
+	public int getTokenExpireTimeInMinutes() {
+		return TokenExpireTimeInMinutes;
+	}
+
+	public void setTokenExpireTimeInMinutes(int tokenExpireTimeInMinutes) {
+		TokenExpireTimeInMinutes = tokenExpireTimeInMinutes;
+	}
+
 	
 }
 
