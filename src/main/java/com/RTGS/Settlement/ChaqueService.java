@@ -24,7 +24,7 @@ public class ChaqueService extends MasterService{
 	private Facade facade ; 
 	
 	public List<Chaque> getAllChecks(int PageNumber){
-		Pageable paging = PageRequest.of(PageNumber, 20, Sort.by("id"));
+		Pageable paging = PageRequest.of(PageNumber, 20, Sort.by("id").descending());
 		Slice<Chaque> pagedResult = this.chaqueRepo.findBysecondBranchCode(super.get_current_User().getBranchCode(), paging);
 		if (pagedResult.hasContent()) {
 			return pagedResult.getContent();
