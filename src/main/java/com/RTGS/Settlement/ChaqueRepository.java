@@ -28,5 +28,5 @@ public interface ChaqueRepository extends JpaRepository<Chaque,Integer>,PagingAn
 	
 	public Chaque findBysequenceNum(int sequenceNum);
 
-	public Chaque findBycheckId(int checkId);
+	public List<Chaque> findBycheckId(int checkId);
 }

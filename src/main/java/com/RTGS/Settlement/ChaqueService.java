@@ -32,6 +32,7 @@ public class ChaqueService extends MasterService{
 			return new ArrayList<Chaque>();
 		}	
 	}
+
 	
 	public void setCheckUserData(Chaque chaque , String secondBankName , String secondBranchName , String secondBranchCode ,int userId, String userName) {
 		chaque.setSecondBankName(secondBankName);
@@ -46,7 +47,7 @@ public class ChaqueService extends MasterService{
 		
 	}
 	
-	public Chaque findByCheckID(int checkID) {
+	public List<Chaque> findByCheckID(int checkID) {
 		return this.chaqueRepo.findBycheckId(checkID) ;
 	}
 	

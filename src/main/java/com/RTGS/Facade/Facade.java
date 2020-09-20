@@ -65,7 +65,14 @@ public class Facade {
 			RTGSUser user =  masterService.get_current_User() ; 
 			chaqueService.setCheckUserData(chaque,user.getBankName(),user.getBranchName(),user.getBranchCode(),user.getId(),user.getUsername());
 			chaque = initSequenceVar(chaque) ; 
-			String result = validationService.validateCheckData(chaque,userService.getAllUsers(),chaqueService.findByCheckID(chaque.getCheckId()));
+			List<Chaque> prevChecksList = chaqueService.findByCheckID(chaque.getCheckId()) ; 
+			String result  = ""; 
+			for(Chaque check : prevChecksList) {
+				result = validationService.validateCheckData(chaque,userService.getAllUsers(),check) ; 
+				if(!result.equalsIgnoreCase("ok")) {
+					return result ; 
+				}
+			}			
 			if(result.equalsIgnoreCase("ok")) {
 				try {
 				orderMessageSender.sendOrder(chaque);
@@ -298,6 +305,10 @@ public class Facade {
 			}
 		}		
 		return bankBranch ; 
+	}
+
+	public MasterService getMasterService() {
+		return masterService;
 	}
 	
 	

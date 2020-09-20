@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -86,6 +87,23 @@ public class ChaqueController {
 		return mav; 
 	}
 	
+	
+	
+	@RequestMapping(method = RequestMethod.POST , value = "/settlements/Search")
+	public ModelAndView searchCheckByCheckNumber(@RequestParam("search") String checkNumber) {
+		ModelAndView mav = new ModelAndView("settlements/searchCheck");
+		List<Chaque> checksList = facade.getChaqueService().findByCheckID(Integer.valueOf(checkNumber));
+		List<Chaque> filteredList = new ArrayList<Chaque>();
+		RTGSUser user = facade.getMasterService().get_current_User();
+		for(Chaque check : checksList){
+			if(check.getSecondBankName().equalsIgnoreCase(user.getBankName()))
+				if(check.getSecondBranchName().equalsIgnoreCase(user.getBranchName())) {
+					filteredList.add(check);
+				}
+		}
+		mav.addObject("checksList", filteredList);
+		return mav ; 
+	}
 	
 	
 	private ModelAndView success(String msg ) {
