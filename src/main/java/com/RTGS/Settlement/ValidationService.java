@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.RTGS.MasterService;
 import com.RTGS.security.users.RTGSUser;
 
 @Service
@@ -45,7 +46,34 @@ public class ValidationService {
 			}
 		}
 		
+		if(!checkDateValue(check)) {
+			return "لا يمكن ادخال شيك بهذا التاريخ";
+		}
+		
 		return "ok" ; 
+	}
+	
+	
+	public boolean checkDateValue(Chaque check ) {
+		String currDate = MasterService.getDateAsString() ;
+		int currYear =Integer.valueOf( MasterService.getYearFromStringDate(currDate));
+		int CurrMonth = Integer.valueOf(MasterService.getMonthFromStringDate(currDate));
+		int currDay =Integer.valueOf( MasterService.getDayFromStringDate(currDate));
+		
+		String checkDate = check.getLocalDateTime() ; 
+		int checkYear = Integer.valueOf(MasterService.getYearFromStringDate(checkDate)); 
+		int checkMonth =Integer.valueOf( MasterService.getMonthFromStringDate(checkDate)) ; 
+		int checkDay = Integer.valueOf(MasterService.getDayFromStringDate(checkDate)); 
+		
+		if(checkYear <= currYear ) {
+			if(checkMonth <= CurrMonth) {
+				if(checkDay <= currDay) {
+					return true ; 
+				}
+			}
+		}
+		
+		return false ; 
 	}
 	
 	
