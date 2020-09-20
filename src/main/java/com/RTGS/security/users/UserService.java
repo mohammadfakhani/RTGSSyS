@@ -316,5 +316,16 @@ public class UserService extends MasterService {
 		}
 		return false  ;
 	}
+
+	
+	public String getCodeFromBankBranch(String bankName , String branchName ) {
+		List<RTGSUser> usersList = this.userRepository.findBybankName(bankName);
+		for(RTGSUser user : usersList ) {
+			if(user.getBranchName().equalsIgnoreCase(branchName)) {
+				return user.getBranchCode();
+			}
+		}
+		return null ; 
+	}
 	
 }

@@ -56,6 +56,12 @@ public class Facade {
 	//Services Flow
 	
 	public String addCheck(Chaque chaque) {
+			String branchCode = this.userService.getCodeFromBankBranch(chaque.getFirstBankName(), chaque.getFirstBranchName());
+			if(branchCode == null ) {
+				return "البنك المطلوب غير موجود";
+			}else {
+				chaque.setFirstBranchCode(branchCode);
+			}
 			RTGSUser user =  masterService.get_current_User() ; 
 			chaqueService.setCheckUserData(chaque,user.getBankName(),user.getBranchName(),user.getBranchCode(),user.getId(),user.getUsername());
 			chaque = initSequenceVar(chaque) ; 
@@ -278,6 +284,21 @@ public class Facade {
 		System.out.println("checks injection finished ");
 	}
 
+	
+	
+	public List<String> getBanksList() {
+		List<RTGSUser> usersList = this.userService.getAllUsers() ; 
+		List<String> bankBranch = new ArrayList<String>();
+		for(RTGSUser user : usersList ) {
+			if(!user.getUsername().equalsIgnoreCase("admin")) {
+				String bankName = user.getBankName() ; 
+				String branchName = user.getBranchName(); 
+				String cat = bankName+"."+branchName; 
+				bankBranch.add(cat);
+			}
+		}		
+		return bankBranch ; 
+	}
 	
 	
 	

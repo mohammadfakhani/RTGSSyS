@@ -30,14 +30,6 @@ public class ChaqueController {
 		return mav ; 
 	}
 	
-	/*
-	 
-	@RequestMapping(method = RequestMethod.GET , value = "/settlements/test/inject")
-	public ModelAndView injectTestData() {
-		this.chaqueService.injectData() ; 
-		return this.success("test data added ");
-	}
-	*/
 	
 	@RequestMapping(method = RequestMethod.GET , value = "/settlements/test/load")
 	public String stresTest() {
@@ -56,20 +48,14 @@ public class ChaqueController {
 	@RequestMapping(method = RequestMethod.GET , value = "/settlements/checks/add")
 	public ModelAndView addNewCheckRequest() {
 		ModelAndView mav = new ModelAndView("settlements/add");
-		List<RTGSUser> usersList = facade.getUserService().getAllUsers(); 
-		List<RTGSUser> usersFilteredList = new ArrayList<RTGSUser>() ; 
-		for(RTGSUser user :usersList) {
-			if(!user.getUsername().equalsIgnoreCase("admin")) {
-				usersFilteredList.add(user);
-			}
-		}
-		mav.addObject("banksList", usersFilteredList);
 		mav.addObject("check", new Chaque());
+		mav.addObject("banksList", facade.getBanksList());
 		return mav ; 
 	}
 	
 	@RequestMapping(method = RequestMethod.POST , value = "/settlements/checks/add")
 	public ModelAndView addNewCheckResponse(@ModelAttribute Chaque chaque) {
+		chaque = extractBankBranch(chaque);
 		String result = facade.addCheck(chaque);
 		if(!result.equalsIgnoreCase("ok")) {
 			return failView(result); 
@@ -116,6 +102,29 @@ public class ChaqueController {
 	}
 
 	
+	
+	
+	
+	
+	private Chaque extractBankBranch(Chaque check) {
+		String bankName ="";
+		String branchName ="";
+		boolean dot = false ; 
+		for(Character c : check.getFirstBranchName().toCharArray()) {
+			if(c.equals('.')){
+				dot = true ;	
+				continue;
+			}
+			if(!dot) {
+				bankName +=c ; 
+			}else {
+				branchName+=c ; 
+			}
+		}
+		check.setFirstBankName(bankName);
+		check.setFirstBranchName(branchName);
+		return check ;
+	}
 	
 	
 }

@@ -38,35 +38,43 @@
                 <div class="card-body">
                   <div class="form-group">
                    <label for="exampleInputPassword1">رقم الشيك التسلسلي</label>
-                   <input type="number" max="999999999" name="checkId" class="form-control" th:field="*{checkId}">
+                   <input type="number" max="999999999" name="checkId" class="form-control" th:field="*{checkId}" required>
                   </div>
                   <hr>
-					<div class="form-group">
-                   <label for="exampleInputPassword1">اسم المصرف الأول (المصرف المصدر للشيك )</label>
-                   <input type="text" name="firstBankName" class="form-control" th:field="*{firstBankName}">
-                  </div>
-                  <div class="form-group">
-                   <label for="exampleInputPassword1">اسم االفرع الأول</label>
-                   <input type="text" name="FirstBranchName" class="form-control" th:field="*{FirstBranchName}">
-                  </div>
+                   <div class="form-group">
+                       <label class="col-sm-3 col-form-label">البنك المصدر للشيك</label>
+                           <div class="col-sm-9">
+                                <select class="form-control" th:field="*{FirstBranchName}" >
+                                     <option th:each="bank : ${banksList}"
+                                        th:value="${bank}"
+                                        th:text="${bank} "></option>
+                                </select>
+                           </div>
+                    </div>
 					<hr>
-				 <div class="form-group">
-                   <label for="exampleInputPassword1">رمز الفرع الأول</label>
-                   <input type="text" name="FirstBranchCode" class="form-control" th:field="*{FirstBranchCode}">
-                  </div>
                   <div class="form-group">
                    <label for="exampleInputPassword1">رقم الحساب</label>
-                   <input type="text" name="ClientAccountNumber" class="form-control" th:field="*{ClientAccountNumber}">
+                   <input type="text" name="ClientAccountNumber" class="form-control" th:field="*{ClientAccountNumber}" required>
                   </div>
                   <div class="form-group">
                     <label for="exampleInputEmail1">تاريخ الشيك  </label>
-                    <input type="date" name="localDateTime" class="form-control" th:field="*{localDateTime}">
+                    <input type="date" name="localDateTime" class="form-control" th:field="*{localDateTime}" required>
                   </div>
                   <div class="form-group">
-                   <label for="exampleInputPassword1">القيمة</labela>
-                   <input type="number" max="999999999999999999" name="Amount" class="form-control" th:field="*{Amount}">
+                   <label for="exampleInputPassword1">القيمة</label>
+                   <input type="number" max="999999999999999999" name="Amount" class="form-control" th:field="*{Amount}" required>
                   </div>
-                         
+                  <div class="row">
+                            <h3> يرجى الإطلاع على المعلومات قبل الضغط على زر التأكيد</h3>
+                            <p class="mb-2">&nbsp</p>
+                        </div>
+                        <div class="row">
+                            <br>
+                            <label class="toggle-switch" style="float: right;">
+                                <input type="checkbox" required="">
+                                <span class="toggle-slider round"></span>
+                            </label>
+                        </div>
                 </div>
                 <hr>
                 <!-- /.card-body -->
