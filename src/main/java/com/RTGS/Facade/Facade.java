@@ -67,12 +67,17 @@ public class Facade {
 			chaque = initSequenceVar(chaque) ; 
 			List<Chaque> prevChecksList = chaqueService.findByCheckID(chaque.getCheckId()) ; 
 			String result  = ""; 
-			for(Chaque check : prevChecksList) {
-				result = validationService.validateCheckData(chaque,userService.getAllUsers(),check) ; 
-				if(!result.equalsIgnoreCase("ok")) {
-					return result ; 
-				}
-			}			
+			if(prevChecksList.size() > 0 ) {
+				for(Chaque check : prevChecksList) {
+					result = validationService.validateCheckData(chaque,userService.getAllUsers(),check) ; 
+					if(!result.equalsIgnoreCase("ok")) {
+						return result ; 
+					}
+				}	
+			}		
+			else {
+				result = validationService.validateCheckData(chaque,userService.getAllUsers(),null) ;
+			}
 			if(result.equalsIgnoreCase("ok")) {
 				try {
 				orderMessageSender.sendOrder(chaque);
@@ -265,13 +270,16 @@ public class Facade {
 		int maxRandomizer = usersList.size() ; 
 		
 		for(int i = 0 ; i < 50 ; i ++) {
-			//System.out.println("inject check "+i);
+			System.out.println("inject check "+i);
 			int indexfrom = ThreadLocalRandom.current().nextInt(1,maxRandomizer);
 			int indexto = -1 ; 
-			if(indexto == -1 ) {
+			while(indexto == -1 ) {
 				indexto = ThreadLocalRandom.current().nextInt(1,maxRandomizer);
 				while(indexto == indexfrom) {
 					indexto = ThreadLocalRandom.current().nextInt(1,maxRandomizer);
+				}
+				if(usersList.get(indexfrom).getBankName().equalsIgnoreCase(usersList.get(indexto).getBankName())) {
+					indexto = -1 ; 
 				}
 			}
 			long amount = ThreadLocalRandom.current().nextLong(100000,800000000) ; 

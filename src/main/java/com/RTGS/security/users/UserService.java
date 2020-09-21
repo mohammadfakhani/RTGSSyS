@@ -218,6 +218,7 @@ public class UserService extends MasterService {
 		RTGSUser admin = new RTGSUser("mohammed_.1996@live.com",passwordEncoder.encode("admin123"),"admin","دمشق", 
 				"المركزي","#cbr0","male","ACCESS_TEST1","ADMIN",MasterService.getDateAsString(),true);
 		this.userRepository.save(admin);
+		/*
 		RTGSUser b1 = new RTGSUser("build1@gmail.com",passwordEncoder.encode("admin123"),"user1","المزرعة", 
 				"التجاري","#cbr1","male","EMPLOYEE","USER",MasterService.getDateAsString(),true);
 		this.userRepository.save(b1);
@@ -278,7 +279,7 @@ public class UserService extends MasterService {
 		RTGSUser b20 = new RTGSUser("build20@gmail.com",passwordEncoder.encode("admin123"),"user20","المرجة", 
 				"العراقي","#cbr20","male","EMPLOYEE","USER",MasterService.getDateAsString(),true);
 		this.userRepository.save(b20);
-		
+		*/
 		
 	}
 	
