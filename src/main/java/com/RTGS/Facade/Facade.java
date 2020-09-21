@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.kafka.KafkaProperties.Admin;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
@@ -269,6 +270,11 @@ public class Facade {
 		List<RTGSUser> usersList = userService.getTestUsers() ; 
 		int maxRandomizer = usersList.size() ; 
 		
+		List<Long> amountList = new ArrayList<Long>();
+		for(int i = 0 ; i < 100 ; i ++ ) {
+			amountList.add(100000l + 50000*i);
+		}
+		
 		for(int i = 0 ; i < 50 ; i ++) {
 			System.out.println("inject check "+i);
 			int indexfrom = ThreadLocalRandom.current().nextInt(1,maxRandomizer);
@@ -282,7 +288,10 @@ public class Facade {
 					indexto = -1 ; 
 				}
 			}
-			long amount = ThreadLocalRandom.current().nextLong(100000,800000000) ; 
+			long amount ;//= ThreadLocalRandom.current().nextLong(100000,800000000) ;
+			int amountVar = ThreadLocalRandom.current().nextInt(100);
+			
+			amount = amountList.get(amountVar); 
 			Chaque check = new  Chaque(i, usersList.get(indexfrom).getBankName(),usersList.get(indexto).getBankName()
 					, usersList.get(indexfrom).getBranchName(),
 					usersList.get(indexfrom).getBranchCode(),usersList.get(indexto).getBranchName(),usersList.get(indexto).getBranchCode()
