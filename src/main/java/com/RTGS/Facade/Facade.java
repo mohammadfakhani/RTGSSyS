@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.kafka.KafkaProperties.Admin;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
@@ -275,7 +274,7 @@ public class Facade {
 			amountList.add(100000l + 50000*i);
 		}
 		
-		for(int i = 0 ; i < 50 ; i ++) {
+		for(int i = 0 ; i < 500 ; i ++) {
 			System.out.println("inject check "+i);
 			int indexfrom = ThreadLocalRandom.current().nextInt(1,maxRandomizer);
 			int indexto = -1 ; 
@@ -300,7 +299,7 @@ public class Facade {
 					, false,0000001+i);
 			check = initSequenceVar(check) ; 
 			sequenceService.addNewSequence(check.getSequenceNum());
-			check.setCheckId(check.getSequenceNum());
+			check.setCheckId(10000000+check.getSequenceNum());
 			orderMessageSender.sendOrder(check);
 			check.setSent(true);
 			chaqueService.addCheck(check);
